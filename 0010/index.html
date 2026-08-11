@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiona &amp; Gerard — September 16, 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,400&family=Cormorant+SC:wght@400;500;600&family=Jost:wght@300;400;500;600&family=Parisienne&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --charcoal: #2b2a27;
+            --charcoal-card: #22211e;
+            --stone: #4d473d;
+            --sand: #cdbfa4;
+            --gold: #b98a4f;
+            --gold-light: #e2c792;
+            --gold-soft: #d9b98a;
+            --cream: #f4efe4;
+            --cream-card: #faf6ee;
+            --white-soft: #faf7f0;
+            --line: rgba(217, 185, 138, 0.4);
+            --shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+            --ease: cubic-bezier(.22, .61, .36, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--charcoal);
+            color: var(--cream);
+            font-family: 'Jost', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            * {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ::selection {
+            background: var(--gold);
+            color: var(--charcoal);
+        }
+
+        /* ---------- reveal utility ---------- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(36px);
+            transition: opacity 1s var(--ease), transform 1s var(--ease);
+            will-change: opacity, transform;
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 {
+            transition-delay: .12s;
+        }
+
+        .reveal-delay-2 {
+            transition-delay: .24s;
+        }
+
+        .reveal-delay-3 {
+            transition-delay: .36s;
+        }
+
+        .reveal-delay-4 {
+            transition-delay: .48s;
+        }
+
+        /* ================= HERO ================= */
+        .hero {
+            position: relative;
+            min-height: 100svh;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 8vh 5vw 7vh;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .hero-media {
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+        }
+
+        .hero-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 50% 22%;
+            transform: scale(1.12);
+            transition: transform 2.4s var(--ease);
+        }
+
+        .hero.loaded .hero-media img {
+            transform: scale(1.02);
+        }
+
+        .hero-media::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to top, rgba(20, 18, 14, 0.88) 0%, rgba(20, 18, 14, 0.40) 50%, rgba(20, 18, 14, 0.30) 70%, rgba(20, 18, 14, 0.50) 100%);
+            z-index: -1;
+        }
+
+        .hero-frame {
+            position: absolute;
+            inset: 5.4vh 6vw;
+            border: 1px solid var(--gold-soft);
+            border-radius: 180px 180px 6px 6px;
+            pointer-events: none;
+            opacity: .85;
+        }
+
+        .hero-inner {
+            position: relative;
+            width: 100%;
+            max-width: 680px;
+            text-align: center;
+            padding-bottom: 2rem;
+        }
+
+        .eyebrow {
+            font-family: 'Jost', sans-serif;
+            font-size: .75rem;
+            letter-spacing: .42em;
+            text-transform: uppercase;
+            color: var(--gold-soft);
+            margin-bottom: 1.4rem;
+        }
+
+        .hero-names {
+            font-family: 'Cormorant SC', serif;
+            font-weight: 400;
+            line-height: .98;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: var(--white-soft);
+        }
+
+        .hero-names .line {
+            font-size: clamp(2.8rem, 9.5vw, 5.6rem);
+        }
+
+        .hero-names .plus {
+            display: block;
+            font-family: 'Cormorant', serif;
+            font-weight: 300;
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            color: var(--gold-soft);
+            margin: .35em 0;
+        }
+
+        .hero-script {
+            font-family: 'Parisienne', cursive;
+            font-size: clamp(1.5rem, 3.8vw, 2.2rem);
+            color: var(--sand);
+            margin: 1.4rem 0 1.8rem;
+            font-weight: 400;
+        }
+
+        .hero-facts {
+            font-size: .86rem;
+            letter-spacing: .24em;
+            text-transform: uppercase;
+            line-height: 2.15;
+            color: var(--white-soft);
+        }
+
+        .hero-facts .divider {
+            width: 34px;
+            height: 1px;
+            background: var(--gold-soft);
+            margin: 1rem auto 1.1rem;
+            opacity: .7;
+        }
+
+        .scroll-cue {
+            position: absolute;
+            bottom: 2.4vh;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: .5rem;
+            font-size: .62rem;
+            letter-spacing: .32em;
+            text-transform: uppercase;
+            color: var(--gold-soft);
+            opacity: .85;
+        }
+
+        .scroll-cue .stem {
+            width: 1px;
+            height: 34px;
+            background: linear-gradient(to bottom, var(--gold-soft), transparent);
+            animation: stem-pulse 2.2s ease-in-out infinite;
+        }
+
+        @keyframes stem-pulse {
+
+            0%,
+            100% {
+                opacity: .35;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* ================= SECTION COMMON STYLES ================= */
+        section {
+            position: relative;
+            padding: 9vh 6vw 10vh;
+        }
+
+        .section-head {
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto 6vh;
+        }
+
+        .section-eyebrow {
+            font-size: .72rem;
+            letter-spacing: .4em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Cormorant SC', serif;
+            font-size: clamp(2rem, 4.4vw, 3.2rem);
+            letter-spacing: .05em;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .section-sub {
+            font-family: 'Cormorant', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-top: .9rem;
+            opacity: .9;
+        }
+
+        /* ================= COUNTDOWN SECTION ================= */
+        .countdown-section {
+            background: linear-gradient(180deg, var(--charcoal) 0%, #1e1d1a 100%);
+            color: var(--cream);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .timer-grid {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .timer-box {
+            background: rgba(35, 34, 30, 0.7);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 2.2rem 1rem;
+            text-align: center;
+            backdrop-filter: blur(8px);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s var(--ease), border-color 0.3s var(--ease);
+        }
+
+        .timer-box:hover {
+            transform: translateY(-4px);
+            border-color: var(--gold-light);
+        }
+
+        .timer-number {
+            font-family: 'Cormorant SC', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 600;
+            color: var(--gold-light);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .timer-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--sand);
+        }
+
+        @media (max-width: 640px) {
+            .timer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .timer-box {
+                padding: 1.6rem 0.8rem;
+            }
+        }
+
+        /* ================= PHOTO CAROUSEL SECTION ================= */
+        .carousel-section {
+            background: var(--charcoal-card);
+            color: var(--cream);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .carousel-container {
+            max-width: 920px;
+            margin: 0 auto;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--line);
+            background: var(--charcoal);
+        }
+
+        .carousel-track-container {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+        }
+
+        @media (max-width: 640px) {
+            .carousel-track-container {
+                aspect-ratio: 4 / 3;
+            }
+        }
+
+        .carousel-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.6s var(--ease);
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2.5rem 2rem 1.5rem;
+            background: linear-gradient(to top, rgba(15, 14, 12, 0.9) 0%, rgba(15, 14, 12, 0) 100%);
+            color: var(--white-soft);
+            text-align: center;
+        }
+
+        .slide-caption-title {
+            font-family: 'Cormorant SC', serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.06em;
+            color: var(--gold-light);
+        }
+
+        .slide-caption-sub {
+            font-family: 'Cormorant', serif;
+            font-style: italic;
+            font-size: 1.05rem;
+            color: var(--sand);
+            margin-top: 0.2rem;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(34, 33, 30, 0.75);
+            border: 1px solid var(--gold-soft);
+            color: var(--gold-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s var(--ease);
+            backdrop-filter: blur(4px);
+        }
+
+        .carousel-btn:hover {
+            background: var(--gold);
+            color: var(--charcoal);
+            border-color: var(--gold);
+        }
+
+        .carousel-btn-prev {
+            left: 1.2rem;
+        }
+
+        .carousel-btn-next {
+            right: 1.2rem;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 1.8rem;
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(217, 185, 138, 0.3);
+            border: 1px solid var(--gold-soft);
+            cursor: pointer;
+            transition: all 0.3s var(--ease);
+        }
+
+        .carousel-dot.active {
+            background: var(--gold);
+            width: 28px;
+            border-radius: 6px;
+        }
+
+        /* ================= DETAILS SECTION ================= */
+        .details {
+            background: var(--cream);
+            color: var(--charcoal);
+        }
+
+        .details .section-title {
+            color: var(--charcoal);
+        }
+
+        .details .section-sub {
+            color: var(--stone);
+        }
+
+        .venue-card {
+            max-width: 840px;
+            margin: 0 auto 8vh;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border: 1px solid rgba(43, 42, 39, 0.14);
+            border-radius: 6px;
+            overflow: hidden;
+            background: var(--cream-card);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .venue-item {
+            padding: 2.8rem 1.8rem;
+            text-align: center;
+            border-left: 1px solid rgba(43, 42, 39, 0.14);
+        }
+
+        .venue-item:first-child {
+            border-left: none;
+        }
+
+        .venue-item .icon {
+            width: 32px;
+            height: 32px;
+            margin: 0 auto 1.2rem;
+            color: var(--gold);
+        }
+
+        .venue-label {
+            font-size: .68rem;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: .7rem;
+            font-weight: 600;
+        }
+
+        .venue-value {
+            font-family: 'Cormorant', serif;
+            font-size: 1.35rem;
+            line-height: 1.4;
+            color: var(--charcoal);
+        }
+
+        .venue-value small {
+            display: block;
+            font-family: 'Jost', sans-serif;
+            font-size: .8rem;
+            letter-spacing: .04em;
+            color: var(--stone);
+            margin-top: .4rem;
+        }
+
+        @media (max-width:680px) {
+            .venue-card {
+                grid-template-columns: 1fr;
+            }
+
+            .venue-item {
+                border-left: none;
+                border-top: 1px solid rgba(43, 42, 39, 0.14);
+            }
+
+            .venue-item:first-child {
+                border-top: none;
+            }
+        }
+
+        /* ================= MAPS NAVIGATION SECTION ================= */
+        .navigation-section {
+            background: var(--cream);
+            color: var(--charcoal);
+            padding-top: 0;
+        }
+
+        .map-wrapper {
+            max-width: 840px;
+            margin: 0 auto;
+            border: 1px solid rgba(43, 42, 39, 0.14);
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--cream-card);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .map-frame {
+            width: 100%;
+            height: 380px;
+            border: 0;
+            display: block;
+        }
+
+        .map-actions {
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            background: #f7f2e7;
+            border-top: 1px solid rgba(43, 42, 39, 0.1);
+        }
+
+        .map-info {
+            text-align: left;
+        }
+
+        .map-info-title {
+            font-family: 'Cormorant SC', serif;
+            font-size: 1.25rem;
+            color: var(--charcoal);
+            letter-spacing: 0.04em;
+        }
+
+        .map-info-addr {
+            font-size: 0.88rem;
+            color: var(--stone);
+            margin-top: 0.2rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.85rem 1.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s var(--ease);
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--white-soft);
+            border-color: var(--gold);
+        }
+
+        .btn-primary:hover {
+            background: #a5783f;
+            border-color: #a5783f;
+            box-shadow: 0 4px 15px rgba(185, 138, 79, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--charcoal);
+            border-color: var(--stone);
+        }
+
+        .btn-secondary:hover {
+            background: var(--charcoal);
+            color: var(--cream);
+        }
+
+        /* ================= SAVE TO CALENDAR SECTION ================= */
+        .calendar-section {
+            background: linear-gradient(180deg, #1e1d1a 0%, var(--charcoal) 100%);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            text-align: center;
+        }
+
+        .calendar-container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            background: rgba(35, 34, 30, 0.6);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            backdrop-filter: blur(6px);
+        }
+
+        .calendar-grid {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .cal-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.68rem;
+            padding: 0.9rem 1.6rem;
+            border-radius: 4px;
+            border: 1px solid var(--gold-soft);
+            background: rgba(43, 42, 39, 0.8);
+            color: var(--gold-light);
+            font-size: 0.75rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s var(--ease);
+        }
+
+        .cal-btn:hover {
+            background: var(--gold);
+            color: var(--charcoal);
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .cal-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* ================= RSVP SECTION ================= */
+        .rsvp-section {
+            background: var(--cream);
+            color: var(--charcoal);
+        }
+
+        .rsvp-container {
+            max-width: 680px;
+            margin: 0 auto;
+            background: var(--cream-card);
+            border: 1px solid rgba(43, 42, 39, 0.14);
+            border-radius: 8px;
+            padding: 3.5rem 3rem;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06);
+        }
+
+        @media (max-width: 600px) {
+            .rsvp-container {
+                padding: 2.2rem 1.5rem;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.6rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.95rem 1.2rem;
+            border: 1px solid rgba(43, 42, 39, 0.2);
+            border-radius: 4px;
+            background: #ffffff;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.95rem;
+            color: var(--charcoal);
+            outline: none;
+            transition: border-color 0.3s var(--ease);
+        }
+
+        .form-control:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(185, 138, 79, 0.15);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2b2a27' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-radio-group {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.4rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-size: 0.92rem;
+            color: var(--charcoal);
+        }
+
+        .radio-option input[type="radio"] {
+            accent-color: var(--gold);
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .btn-submit-whatsapp {
+            width: 100%;
+            padding: 1.1rem 2rem;
+            background: #25D366;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.82rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            transition: all 0.3s var(--ease);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.25);
+        }
+
+        .btn-submit-whatsapp:hover {
+            background: #1eb957;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.35);
+        }
+
+        .btn-submit-whatsapp svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+
+        /* ---- FOOTER NOTE ---- */
+        .footer-note {
+            text-align: center;
+            padding: 6vh 6vw 8vh;
+            border-top: 1px solid rgba(217, 185, 138, 0.2);
+            background: var(--charcoal);
+        }
+
+        .footer-script {
+            font-family: 'Parisienne', cursive;
+            font-size: 2rem;
+            color: var(--gold-soft);
+            margin-bottom: .6rem;
+        }
+
+        .footer-note p {
+            font-size: .82rem;
+            letter-spacing: .12em;
+            color: var(--sand);
+            text-transform: uppercase;
+        }
+
+        /* ================= MUSIC PLAYER TOGGLE ================= */
+        .music-btn {
+            position: fixed;
+            bottom: 26px;
+            right: 22px;
+            z-index: 600;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--charcoal-card);
+            border: 1px solid var(--gold-soft);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-light);
+            cursor: pointer;
+            transition: transform 0.3s var(--ease);
+        }
+
+        .music-btn:hover {
+            transform: scale(1.08);
+        }
+
+        .music-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .music-btn .icon-speaker {
+            display: none;
+        }
+
+        .music-btn .icon-mute {
+            display: block;
+        }
+
+        .music-btn.playing .icon-speaker {
+            display: block;
+        }
+
+        .music-btn.playing .icon-mute {
+            display: none;
+        }
+
+        .music-note {
+            position: absolute;
+            top: -6px;
+            right: -2px;
+            font-size: 0.75rem;
+            color: var(--gold-light);
+            opacity: 0;
+        }
+
+        .music-btn.playing .music-note {
+            animation: noteFloat 2.2s ease-in infinite;
+        }
+
+        @keyframes noteFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(0) translateX(0);
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-26px) translateX(8px);
+            }
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 90px;
+            right: 22px;
+            background: var(--charcoal-card);
+            color: var(--cream);
+            border: 1px solid var(--gold);
+            padding: 0.85rem 1.4rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+            pointer-events: none;
+            z-index: 700;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="hero">
+        <div class="hero-media">
+            <img src="hero-photo.png" alt="Fiona and Gerard embracing on a rocky shoreline">
+        </div>
+        <div class="hero-frame"></div>
+
+
+
+        <div class="scroll-cue">
+            <span>Scroll</span>
+            <span class="stem"></span>
+        </div>
+    </section>
+
+    <!-- ================= COUNTDOWN SECTION ================= -->
+    <section class="countdown-section" id="countdown">
+        <div class="section-head reveal">
+            <span class="section-eyebrow">Build Excitement For The Big Day</span>
+            <h2 class="section-title">Countdown to Celebration</h2>
+            <p class="section-sub">Counting down every second until we say "I Do"</p>
+        </div>
+
+        <div class="timer-grid reveal reveal-delay-1">
+            <div class="timer-box">
+                <div class="timer-number" id="days">00</div>
+                <div class="timer-label">Days</div>
+            </div>
+            <div class="timer-box">
+                <div class="timer-number" id="hours">00</div>
+                <div class="timer-label">Hours</div>
+            </div>
+            <div class="timer-box">
+                <div class="timer-number" id="minutes">00</div>
+                <div class="timer-label">Minutes</div>
+            </div>
+            <div class="timer-box">
+                <div class="timer-number" id="seconds">00</div>
+                <div class="timer-label">Seconds</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= PHOTO CAROUSEL SECTION ================= -->
+    <section class="carousel-section" id="gallery">
+        <div class="section-head reveal">
+            <span class="section-eyebrow">Captured Moments</span>
+            <h2 class="section-title">Our Pre-Wedding Gallery</h2>
+            <p class="section-sub">A glimpse into our love story and favorite memories</p>
+        </div>
+
+        <div class="carousel-container reveal reveal-delay-1" id="photoCarousel">
+            <button class="carousel-btn carousel-btn-prev" onclick="moveSlide(-1)" aria-label="Previous Photo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6" />
+                </svg>
+            </button>
+            <button class="carousel-btn carousel-btn-next" onclick="moveSlide(1)" aria-label="Next Photo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6" />
+                </svg>
+            </button>
+
+            <div class="carousel-track-container">
+                <div class="carousel-track" id="carouselTrack">
+                    <div class="carousel-slide">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=80"
+                            alt="Wedding Ceremony Vows">
+                        <div class="slide-caption">
+                            <div class="slide-caption-title">Sunset Vows</div>
+                            <div class="slide-caption-sub">"Where our forever story begins"</div>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1400&q=80"
+                            alt="Rings & Flowers">
+                        <div class="slide-caption">
+                            <div class="slide-caption-title">Eternity &amp; Flowers</div>
+                            <div class="slide-caption-sub">"Emblems of everlasting devotion"</div>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1400&q=80"
+                            alt="Coastal Romance">
+                        <div class="slide-caption">
+                            <div class="slide-caption-title">Coastal Whispers</div>
+                            <div class="slide-caption-sub">"Walking side by side along the ocean tide"</div>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1400&q=80"
+                            alt="Golden Hour Romance">
+                        <div class="slide-caption">
+                            <div class="slide-caption-title">Golden Hour Magic</div>
+                            <div class="slide-caption-sub">"Wrapped in warmth, joy, and laughter"</div>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1400&q=80"
+                            alt="Floral Elegance">
+                        <div class="slide-caption">
+                            <div class="slide-caption-title">Starlit Celebration</div>
+                            <div class="slide-caption-sub">"Dancing under candlelight with family &amp; friends"</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-dots" id="carouselDots">
+                <div class="carousel-dot active" onclick="goToSlide(0)"></div>
+                <div class="carousel-dot" onclick="goToSlide(1)"></div>
+                <div class="carousel-dot" onclick="goToSlide(2)"></div>
+                <div class="carousel-dot" onclick="goToSlide(3)"></div>
+                <div class="carousel-dot" onclick="goToSlide(4)"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= DETAILS ================= -->
+    <section class="details" id="details">
+        <div class="section-head reveal">
+            <span class="section-eyebrow">The Celebration</span>
+            <h2 class="section-title">Event Details</h2>
+            <p class="section-sub">A coastal evening of vows, feasting, and dancing till late</p>
+        </div>
+
+        <div class="venue-card">
+            <div class="venue-item reveal reveal-delay-1">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <rect x="3" y="4" width="18" height="17" rx="1" />
+                    <path d="M3 9h18M8 2v4M16 2v4" />
+                </svg>
+                <div class="venue-label">Date</div>
+                <div class="venue-value">September 16<small>Wednesday, 2026</small></div>
+            </div>
+            <div class="venue-item reveal reveal-delay-2">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M12 7v5l3.5 2" />
+                </svg>
+                <div class="venue-label">Time</div>
+                <div class="venue-value">7:00 PM<small>Evening ceremony</small></div>
+            </div>
+            <div class="venue-item reveal reveal-delay-3">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z" />
+                    <circle cx="12" cy="9.5" r="2.3" />
+                </svg>
+                <div class="venue-label">Venue</div>
+                <div class="venue-value">Majestic Ballroom<small>1152 Dark Star Lane, San Diego, CA</small></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= GOOGLE MAPS NAVIGATION SECTION ================= -->
+    <section class="navigation-section" id="navigation">
+        <div class="section-head reveal">
+            <span class="section-eyebrow">One-Click Directions to Venue</span>
+            <h2 class="section-title">Location &amp; Navigation</h2>
+            <p class="section-sub">Easily navigate to the Majestic Ballroom with your preferred map app</p>
+        </div>
+
+        <div class="map-wrapper reveal reveal-delay-1">
+            <iframe class="map-frame"
+                src="https://maps.google.com/maps?q=1152%20Dark%20Star%20Lane%2C%20San%20Diego%2C%20CA&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
+                title="Wedding Venue Location Map">
+            </iframe>
+            <div class="map-actions">
+                <div class="map-info">
+                    <div class="map-info-title">Majestic Ballroom</div>
+                    <div class="map-info-addr">1152 Dark Star Lane, San Diego, CA 92101</div>
+                </div>
+                <div class="btn-group">
+                    <a href="https://www.google.com/maps/search/?api=1&query=1152+Dark+Star+Lane,+San+Diego,+CA"
+                        target="_blank" rel="noopener noreferrer" class="btn-primary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z" />
+                            <circle cx="12" cy="9.5" r="2.3" />
+                        </svg>
+                        Google Maps
+                    </a>
+                    <a href="https://maps.apple.com/?q=1152+Dark+Star+Lane,+San+Diego,+CA" target="_blank"
+                        rel="noopener noreferrer" class="btn-secondary">
+                        Apple Maps
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SAVE TO CALENDAR SECTION ================= -->
+    <section class="calendar-section" id="calendar">
+        <div class="section-head reveal">
+            <span class="section-eyebrow">Never Miss A Moment</span>
+            <h2 class="section-title">Save to Calendar</h2>
+            <p class="section-sub">Add our wedding day directly to your schedule with a single click</p>
+        </div>
+
+        <div class="calendar-container reveal reveal-delay-1">
+            <div class="calendar-grid">
+                <!-- Google Calendar Link -->
+                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Fiona+%26+Gerard%27s+Wedding&dates=20260916T190000/20260916T233000&details=Join+us+in+celebrating+Fiona+%26+Gerard%27s+Wedding!&location=Majestic+Ballroom,+1152+Dark+Star+Lane,+San+Diego,+CA"
+                    target="_blank" rel="noopener noreferrer" class="cal-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
+                    Google Calendar
+                </a>
+
+                <!-- iCal / Apple Calendar Download -->
+                <button onclick="downloadICS()" class="cal-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    Apple / Outlook (.ics)
+                </button>
+
+                <!-- Outlook Web Link -->
+                <a href="https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=Fiona+%26+Gerard%27s+Wedding&startdt=2026-09-16T19:00:00Z&enddt=2026-09-16T23:30:00Z&location=Majestic+Ballroom,+1152+Dark+Star+Lane,+San+Diego,+CA"
+                    target="_blank" rel="noopener noreferrer" class="cal-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="17" rx="1" />
+                        <path d="M3 9h18M8 2v4M16 2v4" />
+                    </svg>
+                    Outlook Web
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= LIVE RSVP TRACKING SECTION ================= -->
+    <section class="rsvp-section" id="rsvp">
+        <div class="section-head reveal">
+            <span class="section-eyebrow">Live RSVP Tracking</span>
+            <h2 class="section-title">RSVP &amp; Guest Confirmation</h2>
+            <p class="section-sub">Send guest counts and attendance directly via WhatsApp</p>
+        </div>
+
+        <div class="rsvp-container reveal reveal-delay-1">
+            <form id="rsvpForm" onsubmit="sendWhatsAppRSVP(event)">
+                <div class="form-group">
+                    <label class="form-label" for="guestName">Full Name *</label>
+                    <input type="text" id="guestName" class="form-control" placeholder="e.g. Eleanor &amp; Arthur Vance"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Will You Be Attending? *</label>
+                    <div class="form-radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="attendance" value="Joyfully Accepts" checked>
+                            Joyfully Accepts
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="attendance" value="Regretfully Declines">
+                            Regretfully Declines
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="guestCount">Total Guest Count *</label>
+                    <select id="guestCount" class="form-control" required>
+                        <option value="1 Guest">1 Guest</option>
+                        <option value="2 Guests" selected>2 Guests</option>
+                        <option value="3 Guests">3 Guests</option>
+                        <option value="4 Guests">4 Guests</option>
+                        <option value="5+ Guests">5+ Guests (Specify in notes)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="guestNotes">Dietary Restrictions or Special Wishes</label>
+                    <textarea id="guestNotes" class="form-control"
+                        placeholder="Let us know any food preferences, songs you'd love to hear, or special wishes..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit-whatsapp">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+                    </svg>
+                    Send RSVP via WhatsApp
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER NOTE ================= -->
+    <div class="footer-note">
+        <div class="footer-script">With love, Fiona &amp; Gerard</div>
+        <p>Kindly RSVP by August 16th, 2026</p>
+    </div>
+
+    <!-- ================= BACKGROUND MUSIC PLAYER ================= -->
+    <button class="music-btn" id="musicBtn" aria-label="Toggle background music">
+        <span class="music-note">♪</span>
+        <!-- Mute icon (initial) -->
+        <svg class="icon-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path
+                d="M22 9L16 15M16 9L22 15M3 10.5V13.5C3 14.6046 3.5 15.5 5.5 16C7.5 16.5 9 21 12 21C14 21 14 3 12 3C9 3 7.5 7.5 5.5 8C3.5 8.5 3 9.39543 3 10.5Z"
+                stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <!-- Speaker icon (playing) -->
+        <svg class="icon-speaker" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path
+                d="M19 6C20.5 7.5 21 10 21 12C21 14 20.5 16.5 19 18M16 8.99998C16.5 9.49998 17 10.5 17 12C17 13.5 16.5 14.5 16 15M3 10.5V13.5C3 14.6046 3.5 15.5 5.5 16C7.5 16.5 9 21 12 21C14 21 14 3 12 3C9 3 7.5 7.5 5.5 8C3.5 8.5 3 9.39543 3 10.5Z"
+                stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+    </button>
+
+    <audio id="bgMusic" loop preload="auto">
+        <source src="music/leberch-invitation-wedding-375839.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="toast" id="toast"></div>
+
+    <!-- ================= SCRIPTS ================= -->
+    <script>
+        // 1. Hero Load animation
+        window.addEventListener('load', () => {
+            document.getElementById('hero').classList.add('loaded');
+        });
+
+        // 2. IntersectionObserver for Reveal Animations
+        const revealEls = document.querySelectorAll('.reveal');
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -5% 0px' });
+        revealEls.forEach(el => io.observe(el));
+
+        // 3. Interactive Countdown Timer
+        const weddingDate = new Date('September 16, 2026 19:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance < 0) {
+                document.getElementById('days').innerText = "00";
+                document.getElementById('hours').innerText = "00";
+                document.getElementById('minutes').innerText = "00";
+                document.getElementById('seconds').innerText = "00";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = String(days).padStart(2, '0');
+            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // 4. Save to Calendar - Download ICS file
+        function downloadICS() {
+            const icsData =
+                `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Fiona and Gerard Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+SUMMARY:Fiona & Gerard's Wedding
+DESCRIPTION:Join us for Fiona & Gerard's Wedding Celebration!
+LOCATION:Majestic Ballroom, 1152 Dark Star Lane, San Diego, CA
+DTSTART:20260916T190000Z
+DTEND:20260916T233000Z
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR`;
+
+            const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.setAttribute('download', 'Fiona_and_Gerard_Wedding.ics');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showToast("Wedding event file (.ics) downloaded!");
+        }
+
+        // 5. WhatsApp RSVP Integration
+        function sendWhatsAppRSVP(event) {
+            event.preventDefault();
+            const name = document.getElementById('guestName').value;
+            const attendance = document.querySelector('input[name="attendance"]:checked').value;
+            const count = document.getElementById('guestCount').value;
+            const notes = document.getElementById('guestNotes').value;
+
+            let message = `Hello Fiona & Gerard! ✨%0A%0ANew RSVP Confirmation:%0A👤 Name: ${encodeURIComponent(name)}%0A💌 Status: ${encodeURIComponent(attendance)}%0A👥 Guest Count: ${encodeURIComponent(count)}`;
+
+            if (notes.trim() !== '') {
+                message += `%0A📝 Notes: ${encodeURIComponent(notes)}`;
+            }
+
+            // Opens WhatsApp API with pre-formatted message
+            const whatsappUrl = `https://api.whatsapp.com/send?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+            showToast("Opening WhatsApp with your RSVP details...");
+        }
+
+        // 6. Background Music player
+        const musicBtn = document.getElementById('musicBtn');
+        const bgMusic = document.getElementById('bgMusic');
+        const toast = document.getElementById('toast');
+
+        function showToast(msg) {
+            if (!toast) return;
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3500);
+        }
+
+        if (musicBtn && bgMusic) {
+            musicBtn.addEventListener('click', () => {
+                if (bgMusic.paused) {
+                    bgMusic.play().then(() => {
+                        musicBtn.classList.add('playing');
+                        showToast("Playing background music 🎵");
+                    }).catch((err) => {
+                        console.error('Audio playback error:', err);
+                        showToast("Click again to play music");
+                    });
+                } else {
+                    bgMusic.pause();
+                    musicBtn.classList.remove('playing');
+                    showToast("Music paused");
+                }
+            });
+        }
+
+        // 7. Interactive Photo Carousel Script
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const track = document.getElementById('carouselTrack');
+        const dots = document.querySelectorAll('.carousel-dot');
+        let autoSlideTimer = null;
+
+        function updateCarousel() {
+            if (!track) return;
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function moveSlide(direction) {
+            if (!slides.length) return;
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            updateCarousel();
+            resetAutoSlide();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+            resetAutoSlide();
+        }
+
+        function startAutoSlide() {
+            if (!slides.length) return;
+            autoSlideTimer = setInterval(() => {
+                currentSlide = (currentSlide + 1) % slides.length;
+                updateCarousel();
+            }, 4500);
+        }
+
+        function resetAutoSlide() {
+            clearInterval(autoSlideTimer);
+            startAutoSlide();
+        }
+
+        startAutoSlide();
+    </script>
+
+</body>
+
+</html>
