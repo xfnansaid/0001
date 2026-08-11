@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aditya & Ananya — Haldi Ceremony</title>
+<meta name="description" content="You're invited to the Haldi Ceremony in honor of Aditya and Ananya.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f7f1e7;
+  --paper2:#eee5d7;
+  --ink:#332f2b;
+  --muted:#6e6b65;
+  --green:#425c4c;
+  --deep:#183c36;
+  --line:rgba(66,92,76,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-snap-type:y proximity}
+body{background:#e8dfd2;color:var(--ink);overflow-x:hidden}
+section{scroll-snap-align:start}
+
+/* ---------- HERO ---------- */
+.hero{
+  min-height:100svh; position:relative; display:grid; place-items:center; overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(255,255,255,.72), transparent 42%),
+    linear-gradient(90deg,rgba(245,237,225,.95),rgba(250,246,238,.98),rgba(245,237,225,.95));
+  isolation:isolate;
+}
+.hero:before,.hero:after{
+  content:"";position:absolute;inset:16px;border:1px solid rgba(96,88,75,.22);pointer-events:none;z-index:1
+}
+.hero:after{inset:30px;border:1px solid rgba(96,88,75,.12)}
+.frame{position:absolute;inset:0;pointer-events:none;z-index:2}
+.corner{position:absolute;width:220px;height:220px;opacity:.95}
+.corner svg{width:100%;height:100%;display:block}
+.tl{top:0;left:0}.tr{top:0;right:0;transform:scaleX(-1)}
+.bl{bottom:0;left:0;transform:scaleY(-1)}.br{bottom:0;right:0;transform:scale(-1)}
+
+.leaves{position:absolute;inset:0;z-index:0;pointer-events:none}
+.leaf-cluster{position:absolute;width:240px;opacity:.82}
+.leaf-cluster.left{left:-20px;bottom:18px;transform:rotate(-7deg)}
+.leaf-cluster.right{right:0;top:35px;transform:scaleX(-1) rotate(-3deg)}
+.leaf-cluster svg{width:100%;height:auto}
+
+.lanterns{position:absolute;left:34px;top:65px;z-index:3;opacity:.58}
+.lanterns svg{width:110px;height:220px}
+
+.hero-content{position:relative;z-index:5;text-align:center;width:min(760px,88vw);padding:70px 20px 90px}
+.eyebrow{font:500 13px/1.8 Montserrat,sans-serif;letter-spacing:.25em;text-transform:uppercase;color:#3d3a36}
+.hero h1{font:500 clamp(70px,12vw,125px)/.9 'Cormorant Garamond',serif;letter-spacing:.045em;margin:24px 0 8px;color:#6a594f}
+.script{font:400 clamp(42px,7vw,66px)/1 'Allura',cursive;color:#4b4944}
+.and{font:400 50px/1 'Allura',cursive;color:#68635d;margin:4px 0}
+.hero-meta{margin-top:30px;display:flex;flex-direction:column;gap:7px;font:500 14px/1.5 Montserrat,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#4e4b46}
+.hero-meta strong{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;letter-spacing:.12em}
+.scroll-cue{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:8;color:var(--green);font:500 9px Montserrat,sans-serif;letter-spacing:.3em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px}
+.scroll-cue span{width:1px;height:40px;background:var(--green);animation:scrollLine 1.7s ease-in-out infinite}
+@keyframes scrollLine{0%,100%{transform:scaleY(.35);transform-origin:top;opacity:.3}50%{transform:scaleY(1);opacity:1}}
+
+/* ---------- DETAILS ---------- */
+.details{min-height:100svh;background:#f5f1ea;padding:90px 20px;display:grid;place-items:center;position:relative;overflow:hidden}
+.details:before{content:"";position:absolute;width:700px;height:700px;border:1px solid rgba(66,92,76,.08);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%)}
+.details-wrap{width:min(780px,100%);position:relative;z-index:2}
+.details-title{text-align:center;margin-bottom:42px}
+.details-title .mini{font:500 12px Montserrat,sans-serif;letter-spacing:.28em;color:var(--green);text-transform:uppercase}
+.details-title h2{font:500 clamp(42px,7vw,64px)/1.05 'Cormorant Garamond',serif;margin-top:10px}
+.details-title .rule{width:55px;height:1px;background:var(--green);margin:20px auto 0;opacity:.55}
+.card{background:rgba(255,255,255,.55);border:1px solid rgba(66,92,76,.14);border-radius:5px;padding:8px 48px;box-shadow:0 18px 55px rgba(63,54,43,.06);backdrop-filter:blur(5px)}
+.detail-item{padding:30px 10px;text-align:center;border-bottom:1px solid var(--line)}
+.detail-item:last-child{border-bottom:0}
+.detail-label{font:600 12px Montserrat,sans-serif;letter-spacing:.28em;color:var(--green);text-transform:uppercase;margin-bottom:11px}
+.detail-main{font:500 clamp(25px,4vw,31px)/1.2 'Cormorant Garamond',serif;color:#2e2c29}
+.detail-sub{font:400 16px/1.45 Montserrat,sans-serif;color:#77736d;margin-top:7px}
+
+/* ---------- REVEAL ANIMATION ---------- */
+.reveal{opacity:0;transform:translateY(55px);transition:opacity 1s cubic-bezier(.2,.8,.2,1),transform 1s cubic-bezier(.2,.8,.2,1)}
+.reveal.from-left{transform:translateX(-70px)}
+.reveal.from-right{transform:translateX(70px)}
+.reveal.scale{transform:scale(.88)}
+.reveal.show{opacity:1;transform:none}
+.delay-1{transition-delay:.12s}.delay-2{transition-delay:.24s}.delay-3{transition-delay:.36s}.delay-4{transition-delay:.48s}.delay-5{transition-delay:.60s}
+
+/* Floating decorative motion */
+.float{animation:float 7s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-10px,0)}}
+.leaf-cluster.right.float{animation-name:floatRight}
+@keyframes floatRight{0%,100%{transform:scaleX(-1) rotate(-3deg) translate3d(0,0,0)}50%{transform:scaleX(-1) rotate(-3deg) translate3d(0,10px,0)}}
+
+@media(max-width:600px){
+  .hero:before{inset:10px}.hero:after{inset:20px}
+  .corner{width:145px;height:145px}
+  .lanterns{left:7px;top:62px;transform:scale(.68);transform-origin:top left}
+  .leaf-cluster{width:165px}.leaf-cluster.left{left:-35px;bottom:20px}.leaf-cluster.right{right:-15px;top:55px}
+  .hero-content{padding-top:95px}
+  .hero h1{margin-top:20px}
+  .hero-meta{font-size:10px;letter-spacing:.14em}
+  .hero-meta strong{font-size:21px}
+  .card{padding:4px 20px}
+  .detail-item{padding:27px 5px}
+  .details{padding:70px 15px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto} .reveal{transition:none;transform:none;opacity:1}.float,.scroll-cue span{animation:none}
+}
+</style>
+</head>
+<body>
+
+<section class="hero" id="home">
+  <div class="frame">
+    <div class="corner tl"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h220v8H36C20 8 8 20 8 36v184H0z" fill="#173a34"/><path d="M0 20h200v7H38c-7 0-11 4-11 11v172h-7V38C20 28 28 20 38 20z" fill="#b7a78c" opacity=".75"/><path d="M22 0l48 48-8 8L14 8z" fill="#d6c6ab"/><path d="M60 0l28 28-7 7L50 8z" fill="#d6c6ab"/><path d="M105 0L77 28l7 7 29-29z" fill="#d6c6ab"/><path d="M0 67l29-29 7 7L7 75z" fill="#d6c6ab"/><path d="M0 115l29-29 7 7L7 123z" fill="#d6c6ab"/><path d="M36 9c28 17 54 20 85 7 21-9 42-11 64-6-26 19-53 26-80 20-25-5-47-11-69-3z" fill="#426b58"/><path d="M8 48c20 18 26 40 24 67-1 18 2 34 12 48-22-15-34-39-32-66 2-20 1-34-4-49z" fill="#426b58"/></svg></div>
+    <div class="corner tr"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h220v8H36C20 8 8 20 8 36v184H0z" fill="#173a34"/><path d="M0 20h200v7H38c-7 0-11 4-11 11v172h-7V38C20 28 28 20 38 20z" fill="#b7a78c" opacity=".75"/><path d="M0 20l35 35-8 8L0 34z" fill="#d6c6ab"/><path d="M0 68l35-35 7 7-35 35z" fill="#d6c6ab"/><path d="M0 116l35-35 7 7-35 35z" fill="#d6c6ab"/><path d="M36 9c28 17 54 20 85 7 21-9 42-11 64-6-26 19-53 26-80 20-25-5-47-11-69-3z" fill="#426b58"/><path d="M8 48c20 18 26 40 24 67-1 18 2 34 12 48-22-15-34-39-32-66 2-20 1-34-4-49z" fill="#426b58"/></svg></div>
+    <div class="corner bl"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h220v8H36C20 8 8 20 8 36v184H0z" fill="#173a34"/><path d="M0 20h200v7H38c-7 0-11 4-11 11v172h-7V38C20 28 28 20 38 20z" fill="#b7a78c" opacity=".75"/><path d="M36 9c28 17 54 20 85 7 21-9 42-11 64-6-26 19-53 26-80 20-25-5-47-11-69-3z" fill="#426b58"/><path d="M8 48c20 18 26 40 24 67-1 18 2 34 12 48-22-15-34-39-32-66 2-20 1-34-4-49z" fill="#426b58"/></svg></div>
+    <div class="corner br"><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h220v8H36C20 8 8 20 8 36v184H0z" fill="#173a34"/><path d="M0 20h200v7H38c-7 0-11 4-11 11v172h-7V38C20 28 28 20 38 20z" fill="#b7a78c" opacity=".75"/><path d="M36 9c28 17 54 20 85 7 21-9 42-11 64-6-26 19-53 26-80 20-25-5-47-11-69-3z" fill="#426b58"/><path d="M8 48c20 18 26 40 24 67-1 18 2 34 12 48-22-15-34-39-32-66 2-20 1-34-4-49z" fill="#426b58"/></svg></div>
+  </div>
+
+  <div class="lanterns float" aria-hidden="true">
+    <svg viewBox="0 0 110 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M35 0v25M35 25c-11 8-16 16-16 29v42c0 12 7 21 16 25 9-4 16-13 16-25V54c0-13-5-21-16-29Z" stroke="#665f55" stroke-width="2"/>
+      <path d="M27 36h16M20 54h30M20 86h30M28 106h14" stroke="#665f55" stroke-width="2"/>
+      <path d="M35 121v17" stroke="#665f55" stroke-width="2"/>
+      <path d="M86 50v15M86 65c-9 6-13 13-13 23v30c0 9 5 16 13 19 8-3 13-10 13-19V88c0-10-4-17-13-23Z" stroke="#665f55" stroke-width="2"/>
+      <path d="M80 76h12M74 91h24M74 114h24M80 132h12" stroke="#665f55" stroke-width="2"/>
+      <path d="M86 137v13" stroke="#665f55" stroke-width="2"/>
+    </svg>
+  </div>
+
+  <div class="leaves">
+    <div class="leaf-cluster left float"><svg viewBox="0 0 240 260" xmlns="http://www.w3.org/2000/svg"><path d="M25 250C56 203 83 157 121 111c26-32 53-61 88-88" stroke="#526653" stroke-width="3" fill="none"/><g fill="#65785e"><ellipse cx="50" cy="211" rx="10" ry="28" transform="rotate(-34 50 211)"/><ellipse cx="30" cy="230" rx="9" ry="24" transform="rotate(-65 30 230)"/><ellipse cx="71" cy="184" rx="10" ry="27" transform="rotate(25 71 184)"/><ellipse cx="61" cy="155" rx="9" ry="24" transform="rotate(-52 61 155)"/><ellipse cx="99" cy="147" rx="10" ry="28" transform="rotate(32 99 147)"/><ellipse cx="94" cy="116" rx="9" ry="24" transform="rotate(-46 94 116)"/><ellipse cx="130" cy="111" rx="10" ry="27" transform="rotate(35 130 111)"/><ellipse cx="133" cy="82" rx="9" ry="23" transform="rotate(-38 133 82)"/><ellipse cx="164" cy="74" rx="10" ry="26" transform="rotate(36 164 74)"/><ellipse cx="174" cy="45" rx="9" ry="23" transform="rotate(-34 174 45)"/></g></svg></div>
+    <div class="leaf-cluster right float"><svg viewBox="0 0 240 260" xmlns="http://www.w3.org/2000/svg"><path d="M25 250C56 203 83 157 121 111c26-32 53-61 88-88" stroke="#526653" stroke-width="3" fill="none"/><g fill="#65785e"><ellipse cx="50" cy="211" rx="10" ry="28" transform="rotate(-34 50 211)"/><ellipse cx="30" cy="230" rx="9" ry="24" transform="rotate(-65 30 230)"/><ellipse cx="71" cy="184" rx="10" ry="27" transform="rotate(25 71 184)"/><ellipse cx="61" cy="155" rx="9" ry="24" transform="rotate(-52 61 155)"/><ellipse cx="99" cy="147" rx="10" ry="28" transform="rotate(32 99 147)"/><ellipse cx="94" cy="116" rx="9" ry="24" transform="rotate(-46 94 116)"/><ellipse cx="130" cy="111" rx="10" ry="27" transform="rotate(35 130 111)"/><ellipse cx="133" cy="82" rx="9" ry="23" transform="rotate(-38 133 82)"/><ellipse cx="164" cy="74" rx="10" ry="26" transform="rotate(36 164 74)"/><ellipse cx="174" cy="45" rx="9" ry="23" transform="rotate(-34 174 45)"/></g></svg></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="eyebrow reveal">You're invited to a</div>
+    <div class="eyebrow reveal delay-1">Haldi Ceremony</div>
+    <div class="script reveal delay-2" style="margin-top:22px">in honor of</div>
+    <h1 class="reveal delay-3">ADITYA</h1>
+    <div class="and reveal delay-4">and</div>
+    <h1 class="reveal delay-5">ANANYA</h1>
+    <div class="script reveal delay-3" style="margin-top:25px">Saturday</div>
+    <div class="hero-meta reveal delay-4">
+      <strong>August 8, 2026</strong>
+      <span>At 3:00 PM</span>
+      <span>By the Pool</span>
+      <span>At The Lyle Hotel</span>
+    </div>
+  </div>
+
+  <a class="scroll-cue" href="#details" aria-label="Scroll to event details">Scroll <span></span></a>
+</section>
+
+<section class="details" id="details">
+  <div class="details-wrap">
+    <div class="details-title reveal">
+      <div class="mini">The Celebration</div>
+      <h2>Event Details</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="card">
+      <div class="detail-item reveal from-left">
+        <div class="detail-label">Date</div>
+        <div class="detail-main">August 8, 2026</div>
+      </div>
+      <div class="detail-item reveal from-right delay-1">
+        <div class="detail-label">Time</div>
+        <div class="detail-main">At 3:00 PM</div>
+      </div>
+      <div class="detail-item reveal from-left delay-2">
+        <div class="detail-label">Setting</div>
+        <div class="detail-main">By the Pool</div>
+      </div>
+      <div class="detail-item reveal from-right delay-3">
+        <div class="detail-label">Venue</div>
+        <div class="detail-main">At The Lyle Hotel</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+// Smooth reveal as each piece enters the viewport.
+const observer = new IntersectionObserver((entries, obs) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+      obs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Gentle parallax on decorative elements while scrolling.
+const hero = document.querySelector('.hero');
+const leaves = document.querySelectorAll('.leaf-cluster');
+const lanterns = document.querySelector('.lanterns');
+window.addEventListener('scroll', () => {
+  if (!hero) return;
+  const y = window.scrollY;
+  const progress = Math.min(y / window.innerHeight, 1);
+  leaves.forEach((el, i) => el.style.translate = `0 ${progress * (i ? 22 : -16)}px`);
+  if (lanterns) lanterns.style.translate = `0 ${progress * 28}px`;
+}, {passive:true});
+</script>
+</body>
+</html>
+<html>
+
+<head>
+    <style>
+        /* music toggle */
+        .music-btn {
+            position: fixed;
+            bottom: 26px;
+            right: 22px;
+            z-index: 600;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--maroon-deep);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-light);
+        }
+
+        .music-btn svg {
+            width: 26px;
+            height: 26px;
+        }
+
+        .music-btn .icon-speaker {
+            display: none;
+        }
+
+        .music-btn .icon-mute {
+            display: block;
+        }
+
+        .music-btn.playing .icon-speaker {
+            display: block;
+        }
+
+        .music-btn.playing .icon-mute {
+            display: none;
+        }
+
+        @keyframes flicker {
+
+            0%,
+            100% {
+                transform: scaleY(1) rotate(0deg);
+            }
+
+            30% {
+                transform: scaleY(1.12) rotate(-2deg);
+            }
+
+            60% {
+                transform: scaleY(0.92) rotate(2deg);
+            }
+        }
+
+        .music-note {
+            position: absolute;
+            top: -6px;
+            right: -2px;
+            font-size: 0.6rem;
+            color: var(--gold-light);
+            opacity: 0;
+        }
+
+        .music-btn.playing .music-note {
+            animation: noteFloat 2.2s ease-in infinite;
+        }
+
+        @keyframes noteFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(0) translateX(0);
+            }
+
+            15% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-26px) translateX(8px);
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <button class="music-btn" id="musicBtn" aria-label="Toggle background music">
+        <span class="music-note">♪</span>
+        <!-- Mute icon (shown when music is paused / initial state) -->
+        <svg class="icon-mute" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <path
+                    d="M22 9L16 15M16 9L22 15M3 10.5V13.5C3 14.6046 3.5 15.5 5.5 16C7.5 16.5 9 21 12 21C14 21 14 3 12 3C9 3 7.5 7.5 5.5 8C3.5 8.5 3 9.39543 3 10.5Z"
+                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+        </svg>
+        <!-- Speaker icon (shown when music is playing) -->
+        <svg class="icon-speaker" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <path
+                    d="M19 6C20.5 7.5 21 10 21 12C21 14 20.5 16.5 19 18M16 8.99998C16.5 9.49998 17 10.5 17 12C17 13.5 16.5 14.5 16 15M3 10.5V13.5C3 14.6046 3.5 15.5 5.5 16C7.5 16.5 9 21 12 21C14 21 14 3 12 3C9 3 7.5 7.5 5.5 8C3.5 8.5 3 9.39543 3 10.5Z"
+                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+        </svg>
+    </button>
+    <audio id="bgMusic" loop preload="auto">
+        <source src="music/leberch-invitation-wedding-375839.mp3" type="audio/mpeg">
+    </audio>
+</body>
+
+<script>
+    /* ============ Music toggle ============ */
+    const musicBtn = document.getElementById('musicBtn');
+    const bgMusic = document.getElementById('bgMusic');
+    const toast = document.getElementById('toast');
+    function showToast(msg) {
+        if (!toast) {
+            console.log(msg);
+            return;
+        }
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3200);
+    }
+    if (musicBtn && bgMusic) {
+        musicBtn.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play().then(() => {
+                    musicBtn.classList.add('playing');
+                }).catch((err) => {
+                    console.error('Audio playback error:', err);
+                    showToast('Could not play audio automatically. Please try again.');
+                });
+            } else {
+                bgMusic.pause();
+                musicBtn.classList.remove('playing');
+            }
+        });
+    }
+</script>
+
+</html>
