@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Ayesha & Hamza | Wedding Invitation</title>
+  
+  <!-- Google Fonts for Royal Postcard Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* music toggle */
+        .music-btn {
+            position: fixed;
+            bottom: 26px;
+            right: 22px;
+            z-index: 600;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--maroon-deep);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+        }
+
+        .music-btn svg {
+            width: 26px;
+            height: 26px;
+        }
+
+        .music-btn .icon-speaker {
+            display: none;
+        }
+
+        .music-btn .icon-mute {
+            display: block;
+        }
+
+        .music-btn.playing .icon-speaker {
+            display: block;
+        }
+
+        .music-btn.playing .icon-mute {
+            display: none;
+        }
+
+        @keyframes flicker {
+
+            0%,
+            100% {
+                transform: scaleY(1) rotate(0deg);
+            }
+
+            30% {
+                transform: scaleY(1.12) rotate(-2deg);
+            }
+
+            60% {
+                transform: scaleY(0.92) rotate(2deg);
+            }
+        }
+
+        .music-note {
+            position: absolute;
+            top: -6px;
+            right: -2px;
+            font-size: 0.6rem;
+            color: var(--gold-light);
+            opacity: 0;
+        }
+
+        .music-btn.playing .music-note {
+            animation: noteFloat 2.2s ease-in infinite;
+        }
+
+        @keyframes noteFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(0) translateX(0);
+            }
+
+            15% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-26px) translateX(8px);
+            }
+        }
+    :root {
+      --bg-cream: #FDFBF7;
+      --card-bg: #F5EBE0;
+      --burgundy: #6E1A24;
+      --burgundy-dark: #4A1017;
+      --gold: #B58D57;
+      --gold-light: #D4B28C;
+      --text-dark: #3A322D;
+      --border-color: #CBAE82;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      font-family: 'Cormorant Garamond', serif;
+      line-height: 1.6;
+      display: flex;
+      justify-content: center;
+      padding: 15px 10px;
+      overflow-x: hidden;
+    }
+
+    /* Mobile-First Main Container */
+    .mobile-container {
+      width: 100%;
+      max-width: 460px;
+      background: var(--bg-cream);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ==========================================
+       SCROLL ANIMATIONS & LIVE EFFECTS
+       ========================================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes pulseGold {
+      0%, 100% { opacity: 0.65; }
+      50% { opacity: 1; }
+    }
+
+    /* ==========================================
+       SECTION 1: HERO POSTCARD REPLICA
+       ========================================== */
+    .hero-postcard {
+      background-color: var(--card-bg);
+      border: 1.5px solid var(--border-color);
+      border-radius: 18px;
+      padding: 35px 20px 25px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 12px 30px rgba(110, 26, 36, 0.1);
+      margin-bottom: 40px;
+      overflow: hidden;
+    }
+
+    /* Inner Gold Ornamental Border */
+    .hero-postcard::after {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      border: 1px solid var(--gold-light);
+      border-radius: 14px;
+      pointer-events: none;
+    }
+
+    .ornament {
+      color: var(--gold);
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      letter-spacing: 4px;
+      animation: pulseGold 3.5s infinite ease-in-out;
+    }
+
+    .sub-heading {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 2.5px;
+      color: var(--text-dark);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .couple-name {
+      font-family: 'Alex Brush', cursive;
+      font-size: 3.8rem;
+      color: var(--burgundy);
+      line-height: 1;
+      margin: 4px 0;
+      font-weight: normal;
+    }
+
+    .and-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--gold);
+      font-size: 1.3rem;
+      position: relative;
+      display: inline-block;
+      margin: 2px 0;
+    }
+
+    .and-text::before,
+    .and-text::after {
+      content: "—";
+      margin: 0 8px;
+      color: var(--gold-light);
+    }
+
+    .invitation-text {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 1.8px;
+      color: var(--text-dark);
+      margin: 18px 0;
+      line-height: 1.6;
+    }
+
+    /* Date Box Display */
+    .date-box {
+      margin: 22px 0;
+    }
+
+    .day-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      letter-spacing: 3px;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+
+    .date-grid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      border-top: 1px solid var(--gold-light);
+      border-bottom: 1px solid var(--gold-light);
+      padding: 8px 0;
+      max-width: 270px;
+      margin: 0 auto;
+    }
+
+    .date-month,
+    .date-year {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      color: var(--text-dark);
+    }
+
+    .date-day {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.7rem;
+      color: var(--burgundy);
+      line-height: 1;
+      font-weight: 600;
+    }
+
+    .time-text {
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      color: var(--text-dark);
+      margin-top: 12px;
+    }
+
+    .venue-title {
+      font-family: 'Alex Brush', cursive;
+      font-size: 2.4rem;
+      color: var(--burgundy);
+      margin-top: 10px;
+    }
+
+    .venue-address {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 1.5px;
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    /* Couple Traditional Avatar Illustration */
+    .avatar-wrapper {
+      margin: 20px auto 10px;
+      width: 175px;
+      height: 175px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: floatSlow 4s ease-in-out infinite;
+      filter: drop-shadow(0 8px 15px rgba(110, 26, 36, 0.15));
+    }
+
+    .avatar-wrapper svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .rsvp-box {
+      margin-top: 20px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+    }
+
+    .rsvp-box span {
+      display: block;
+      color: var(--burgundy);
+      font-weight: 700;
+      margin-top: 3px;
+    }
+
+    /* ==========================================
+       SECTION 2: BRIDE & GROOM DETAILS
+       ========================================== */
+    .section {
+      padding: 35px 10px;
+      text-align: center;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.3rem;
+      color: var(--burgundy);
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    .section-divider {
+      color: var(--gold);
+      font-size: 1.2rem;
+      margin-bottom: 25px;
+      animation: pulseGold 3s infinite ease-in-out;
+    }
+
+    .couple-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .person-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 25px 20px;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .person-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 24px rgba(110, 26, 36, 0.08);
+    }
+
+    .person-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      letter-spacing: 2.5px;
+      color: var(--burgundy);
+      margin-bottom: 6px;
+    }
+
+    .person-role {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--gold);
+      font-size: 1.15rem;
+      margin-bottom: 12px;
+    }
+
+    .person-desc {
+      font-size: 0.98rem;
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    /* ==========================================
+       SECTION 3: COUNTDOWN TIMER
+       ========================================== */
+    .countdown-container {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 30px 15px;
+      margin: 25px 0 40px;
+      box-shadow: 0 8px 22px rgba(110, 26, 36, 0.06);
+    }
+
+    .timer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 22px;
+    }
+
+    .timer-box {
+      background: var(--bg-cream);
+      border: 1px solid var(--gold-light);
+      border-radius: 10px;
+      padding: 14px 4px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    }
+
+    .timer-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: var(--burgundy);
+      line-height: 1;
+    }
+
+    .timer-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.58rem;
+      letter-spacing: 1px;
+      color: var(--text-dark);
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    /* ==========================================
+       SECTION 4: FIND US (MAP)
+       ========================================== */
+    .map-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 22px;
+      overflow: hidden;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 22px rgba(110, 26, 36, 0.06);
+    }
+
+    .map-frame {
+      width: 100%;
+      height: 240px;
+      border: 1.5px solid var(--gold-light);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 16px 0;
+    }
+
+    .map-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .btn-directions {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 13px 26px;
+      background-color: var(--burgundy);
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      border-radius: 50px;
+      transition: background 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 4px 12px rgba(110, 26, 36, 0.3);
+    }
+
+    .btn-directions:hover {
+      background-color: var(--burgundy-dark);
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================
+       SECTION: RSVP FORM & GUEST COUNTER
+       ========================================== */
+    .rsvp-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 30px 20px;
+      box-shadow: 0 8px 22px rgba(110, 26, 36, 0.06);
+      margin-bottom: 35px;
+    }
+
+    .rsvp-form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      text-align: left;
+      margin-top: 15px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.76rem;
+      letter-spacing: 1.5px;
+      color: var(--burgundy);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .form-input, .form-textarea {
+      width: 100%;
+      padding: 12px 14px;
+      background-color: var(--bg-cream);
+      border: 1px solid var(--gold-light);
+      border-radius: 10px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-input:focus, .form-textarea:focus {
+      border-color: var(--burgundy);
+      box-shadow: 0 0 0 3px rgba(110, 26, 36, 0.12);
+    }
+
+    .attendance-options {
+      display: flex;
+      gap: 10px;
+    }
+
+    .attendance-btn {
+      flex: 1;
+      position: relative;
+    }
+
+    .attendance-btn input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .attendance-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 8px;
+      background: var(--bg-cream);
+      border: 1.5px solid var(--gold-light);
+      border-radius: 10px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 1px;
+      color: var(--text-dark);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .attendance-btn input[type="radio"]:checked + .attendance-label {
+      background: var(--burgundy);
+      color: #ffffff;
+      border-color: var(--burgundy);
+      box-shadow: 0 4px 12px rgba(110, 26, 36, 0.25);
+    }
+
+    /* Guest Counter Styling */
+    .counter-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-cream);
+      border: 1.5px solid var(--gold-light);
+      border-radius: 12px;
+      padding: 8px 16px;
+    }
+
+    .counter-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1.5px solid var(--burgundy);
+      background: var(--bg-cream);
+      color: var(--burgundy);
+      font-size: 1.3rem;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .counter-btn:hover:not(:disabled) {
+      background: var(--burgundy);
+      color: #fff;
+    }
+
+    .counter-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      border-color: var(--gold-light);
+      color: var(--gold-light);
+    }
+
+    .counter-display {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: var(--burgundy);
+      min-width: 40px;
+      text-align: center;
+    }
+
+    .btn-whatsapp {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 14px 20px;
+      background: #25D366;
+      color: #ffffff;
+      border: none;
+      border-radius: 50px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 6px 16px rgba(37, 211, 102, 0.35);
+      margin-top: 6px;
+    }
+
+    .btn-whatsapp:hover {
+      background: #1EBE5D;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.45);
+    }
+
+    .btn-whatsapp svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 25px 0 15px;
+      font-family: 'Alex Brush', cursive;
+      font-size: 2rem;
+      color: var(--burgundy);
+    }
+  </style>
+</head>
+<body>
+
+  <main class="mobile-container">
+    
+    <!-- ==========================================
+         HERO SECTION: POSTCARD REPLICA
+         ========================================== -->
+    <section class="hero-postcard reveal">
+      <div class="ornament">❀ ❖ ❀</div>
+      <p class="sub-heading">Together With Their Families</p>
+      
+      <h1 class="couple-name">Ayesha</h1>
+      <div class="and-text">and</div>
+      <h1 class="couple-name">Hamza</h1>
+      
+      <p class="invitation-text">
+        REQUEST THE HONOR OF YOUR PRESENCE<br>
+        AT THEIR WEDDING
+      </p>
+
+      <!-- Date Section -->
+      <div class="date-box">
+        <p class="day-name">SUNDAY</p>
+        <div class="date-grid">
+          <span class="date-month">DECEMBER</span>
+          <span class="date-day">21</span>
+          <span class="date-year">2026</span>
+        </div>
+        <p class="time-text">AT 05:30 PM</p>
+      </div>
+
+      <!-- Venue & Malabar Address -->
+      <div class="venue-info">
+        <div class="ornament" style="font-size: 1rem;">❖</div>
+        <h2 class="venue-title">The Raviz Kadavu</h2>
+        <p class="venue-address">
+          BYPASS ROAD, CALICUT (KOZHIKODE),<br>
+          MALABAR, KERALA
+        </p>
+      </div>
+
+      <!-- Bride & Groom Traditional Kerala/Maroon Avatar Illustration -->
+      <div class="avatar-wrapper" aria-label="Bride and Groom Illustration">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Decorative Aura -->
+          <circle cx="100" cy="100" r="85" fill="#F0E2D0" opacity="0.6"/>
+          <circle cx="100" cy="100" r="75" stroke="#D4B28C" stroke-width="1" stroke-dasharray="4 4"/>
+          <!-- Groom Silky Black Attire -->
+          <path d="M110 80 C110 65 130 65 130 80 L145 170 L100 170 Z" fill="#231F20"/>
+          <path d="M118 80 L118 130" stroke="#B58D57" stroke-width="1.5"/>
+          <!-- Groom Head -->
+          <circle cx="120" cy="55" r="14" fill="#E5C29F"/>
+          <path d="M106 53 C106 40 134 40 134 53 Z" fill="#1A1A1A"/>
+          <!-- Bride Deep Maroon Attire & Dupatta -->
+          <path d="M55 170 C65 110 85 85 95 80 L110 170 Z" fill="#6E1A24"/>
+          <path d="M50 170 C60 100 85 65 95 65 L105 170 Z" fill="#88202D" opacity="0.85"/>
+          <!-- Gold Zari Embroidery -->
+          <path d="M55 160 Q80 155 108 160" stroke="#B58D57" stroke-width="2" fill="none"/>
+          <path d="M60 145 Q80 140 105 145" stroke="#B58D57" stroke-width="1.5" stroke-dasharray="3 3" fill="none"/>
+          <!-- Bride Head & Dupatta Drape -->
+          <circle cx="85" cy="58" r="13" fill="#E5C29F"/>
+          <path d="M72 58 C72 42 98 42 98 58 C98 70 75 70 72 58 Z" fill="#6E1A24"/>
+          <path d="M72 58 Q85 40 98 58" stroke="#B58D57" stroke-width="1.5" fill="none"/>
+          <!-- Holding Hands Center Gold Detail -->
+          <circle cx="105" cy="105" r="4" fill="#D4B28C"/>
+        </svg>
+      </div>
+
+      <a href="#rsvp-section" class="rsvp-box" style="text-decoration: none; display: block; color: inherit;">
+        RSVP NOW
+        <span>+91 98460 12345</span>
+      </a>
+    </section>
+
+
+    <button class="music-btn" id="musicBtn" aria-label="Toggle background music">
+        <span class="music-note">♪</span>
+        <!-- Mute icon (shown when music is paused / initial state) -->
+        <svg class="icon-mute" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <path
+                    d="M22 9L16 15M16 9L22 15M3 10.5V13.5C3 14.6046 3.5 15.5 5.5 16C7.5 16.5 9 21 12 21C14 21 14 3 12 3C9 3 7.5 7.5 5.5 8C3.5 8.5 3 9.39543 3 10.5Z"
+                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+        </svg>
+        <!-- Speaker icon (shown when music is playing) -->
+        <svg class="icon-speaker" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <path
+                    d="M19 6C20.5 7.5 21 10 21 12C21 14 20.5 16.5 19 18M16 8.99998C16.5 9.49998 17 10.5 17 12C17 13.5 16.5 14.5 16 15M3 10.5V13.5C3 14.6046 3.5 15.5 5.5 16C7.5 16.5 9 21 12 21C14 21 14 3 12 3C9 3 7.5 7.5 5.5 8C3.5 8.5 3 9.39543 3 10.5Z"
+                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+        </svg>
+    </button>
+    <audio id="bgMusic" loop preload="auto">
+        <source src="music/leberch-invitation-wedding-375839.mp3" type="audio/mpeg">
+    </audio>
+
+
+
+    <!-- ==========================================
+         SECTION 3: COUNTDOWN TIMER
+         ========================================== -->
+
+
+    <!-- ==========================================
+         SECTION: RSVP WITH GUEST COUNTER & WHATSAPP
+         ========================================== -->
+    
+    <!-- ==========================================
+         SECTION 5: FIND US (MALABAR, KERALA MAP)
+         ========================================== -->
+    <section class="section reveal">
+      <h2 class="section-title">Find Us</h2>
+      <div class="section-divider">— ❀ —</div>
+
+      <div class="map-card">
+        <p class="venue-address" style="font-weight: bold; margin-bottom: 4px;">THE RAVIZ KADAVU RESORT</p>
+        <p class="venue-address" style="margin-bottom: 10px;">NH 66, Bypass Road, Calicut (Kozhikode), Kerala 673633</p>
+        
+        <div class="map-frame">
+          <!-- Embedded Google Map centered on Calicut / Kozhikode, Malabar -->
+          <iframe 
+            src="https://www.google.com/maps?q=The+Raviz+Kadavu+Kozhikode+Kerala&output=embed" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
+        <a href="https://maps.google.com/?q=The+Raviz+Kadavu+Kozhikode+Kerala" target="_blank" class="btn-directions">
+          Open in Google Maps
+        </a>
+      </div>
+    </section>
+
+    <footer class="reveal">
+      Ayesha & Hamza
+    </footer>
+
+  </main>
+
+  <!-- ==========================================
+       JAVASCRIPT: COUNTDOWN & SCROLL ANIMATION
+       ========================================== -->
+  <script>
+
+
+    /* --- 2. SMOOTH SCROLL REVEAL ANIMATION --- */
+    function revealOnScroll() {
+      const reveals = document.querySelectorAll(".reveal");
+      const windowHeight = window.innerHeight;
+      const revealPoint = 80; // Distance in px from bottom of viewport to trigger
+
+      reveals.forEach((element) => {
+        const elementTop = element.getBoundingClientRect().top;
+        if (elementTop < windowHeight - revealPoint) {
+          element.classList.add("active");
+        }
+      });
+    }
+
+    // Trigger on scroll and once on initial page load
+    window.addEventListener("scroll", revealOnScroll);
+    window.addEventListener("load", revealOnScroll);
+    revealOnScroll();
+
+    /* ============ Music toggle ============ */
+    const musicBtn = document.getElementById('musicBtn');
+    const bgMusic = document.getElementById('bgMusic');
+    const toast = document.getElementById('toast');
+    function showToast(msg) {
+        if (!toast) {
+            console.log(msg);
+            return;
+        }
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3200);
+    }
+    if (musicBtn && bgMusic) {
+        musicBtn.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play().then(() => {
+                    musicBtn.classList.add('playing');
+                }).catch((err) => {
+                    console.error('Audio playback error:', err);
+                    showToast('Could not play audio automatically. Please try again.');
+                });
+            } else {
+                bgMusic.pause();
+                musicBtn.classList.remove('playing');
+            }
+        });
+    }
+
+    /* --- 3. RSVP FORM & GUEST COUNTER LOGIC --- */
+    let guestCount = 1;
+    const minGuests = 1;
+    const maxGuests = 15;
+
+    const guestCountVal = document.getElementById("guestCountVal");
+    const btnMinus = document.getElementById("btnMinus");
+    const btnPlus = document.getElementById("btnPlus");
+    const guestCountGroup = document.getElementById("guestCountGroup");
+    const attendanceInputs = document.querySelectorAll('input[name="attendance"]');
+    const rsvpForm = document.getElementById("rsvpForm");
+
+    function updateCounterButtons() {
+      if (btnMinus) btnMinus.disabled = (guestCount <= minGuests);
+      if (btnPlus) btnPlus.disabled = (guestCount >= maxGuests);
+      if (guestCountVal) guestCountVal.innerText = guestCount;
+    }
+
+    if (btnMinus && btnPlus) {
+      btnMinus.addEventListener("click", () => {
+        if (guestCount > minGuests) {
+          guestCount--;
+          updateCounterButtons();
+        }
+      });
+
+      btnPlus.addEventListener("click", () => {
+        if (guestCount < maxGuests) {
+          guestCount++;
+          updateCounterButtons();
+        }
+      });
+    }
+
+    // Toggle guest counter visibility depending on attendance choice
+    attendanceInputs.forEach(input => {
+      input.addEventListener("change", (e) => {
+        if (e.target.value === "Declining") {
+          if (guestCountGroup) guestCountGroup.style.display = "none";
+        } else {
+          if (guestCountGroup) guestCountGroup.style.display = "block";
+        }
+      });
+    });
+
+    if (rsvpForm) {
+      rsvpForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const name = document.getElementById("guestName").value.trim();
+        const attendance = document.querySelector('input[name="attendance"]:checked').value;
+        const note = document.getElementById("guestNote").value.trim();
+
+        if (!name) return;
+
+        let message = `*WEDDING RSVP - Ayesha & Hamza*\n\n`;
+        message += `👤 *Guest Name:* ${name}\n`;
+
+        if (attendance === "Attending") {
+          message += `✨ *Status:* Joyfully Attending 🎉\n`;
+          message += `👨‍👩‍👧‍👦 *Number of Guests:* ${guestCount}\n`;
+        } else {
+          message += `💐 *Status:* Regrettably Declining\n`;
+        }
+
+        if (note) {
+          message += `📝 *Note / Message:* ${note}\n`;
+        }
+
+        const phoneNumber = "919846012345";
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+        window.open(whatsappUrl, "_blank");
+      });
+    }
+
+  </script>
+</body>
+</html>
