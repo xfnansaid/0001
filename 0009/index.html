@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation | Olivia & Daniel</title>
+    <meta name="description"
+        content="Join us in celebrating the wedding of Olivia and Daniel on Saturday, June 17, 2028 at Borcelle Ballroom. RSVP, directions, photo gallery, countdown, and event details.">
+
+    <!-- Importing Google Fonts for elegant typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* ==================== ROOT VARIABLES ==================== */
+        :root {
+            --bg-soft: #f4f8fb;
+            --primary-navy: #3b4d66;
+            --secondary-slate: #4a5d73;
+            --muted-slate: #6c7e93;
+            --accent-gold: #c5a059;
+            --accent-gold-hover: #b08c46;
+            --light-gold: #f7f2e7;
+            --white-glass: rgba(255, 255, 255, 0.88);
+            --card-shadow: 0 12px 32px rgba(59, 77, 102, 0.08);
+            --border-radius: 16px;
+            --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* ==================== BASE STYLES ==================== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            background-color: var(--bg-soft);
+            color: var(--secondary-slate);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: var(--primary-navy);
+            font-weight: 500;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ==================== ANIMATION UTILITIES ==================== */
+        .slide-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .slide-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==================== BUTTONS & BADGES ==================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 26px;
+            border-radius: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            border: none;
+            outline: none;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-gold);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-gold-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(197, 160, 89, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: #ffffff;
+            color: var(--primary-navy);
+            border: 1px solid rgba(59, 77, 102, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--light-gold);
+            border-color: var(--accent-gold);
+            transform: translateY(-2px);
+        }
+
+        .section-badge {
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-gold);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: var(--primary-navy);
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--muted-slate);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+        }
+
+        /* ==================== HERO SECTION REDESIGN ==================== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            background-image: url('Blue Watercolor Illustration Wedding Invitation.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            box-sizing: border-box;
+        }
+
+        .hero-overlay-card {
+            background: var(--white-glass);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-radius: 24px;
+            padding: 45px 30px;
+            max-width: 680px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(43, 62, 85, 0.12);
+            margin: 0 auto;
+        }
+
+        .hero-monogram {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+        }
+
+        .hero-intro {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--muted-slate);
+            margin-bottom: 12px;
+        }
+
+        .hero-names {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(3.2rem, 8vw, 5.2rem);
+            line-height: 1.1;
+            color: var(--primary-navy);
+            margin-bottom: 15px;
+            word-wrap: break-word;
+        }
+
+        .hero-tagline {
+            font-size: 1.15rem;
+            color: var(--secondary-slate);
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .hero-details-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 35px;
+            padding: 20px;
+            background: rgba(244, 248, 25b, 0.7);
+            border-radius: 16px;
+            border: 1px dashed rgba(197, 160, 89, 0.4);
+        }
+
+        .hero-detail-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            color: var(--primary-navy);
+            font-weight: 500;
+        }
+
+        .hero-detail-icon {
+            font-size: 1.4rem;
+            color: var(--accent-gold);
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        /* ==================== PHOTO CAROUSEL SECTION ==================== */
+        .gallery-section {
+            padding: 90px 20px;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 16px 40px rgba(59, 77, 102, 0.15);
+            background-color: #000;
+        }
+
+        .carousel-track-container {
+            position: relative;
+            width: 100%;
+            height: 520px;
+            overflow: hidden;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            pointer-events: none;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 25px;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0) 100%);
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(4px);
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-navy);
+            font-size: 1.4rem;
+            transition: var(--transition-smooth);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .carousel-btn:hover {
+            background: #ffffff;
+            color: var(--accent-gold);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-btn-prev {
+            left: 16px;
+        }
+
+        .carousel-btn-next {
+            right: 16px;
+        }
+
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(59, 77, 102, 0.25);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .carousel-dot.active {
+            background-color: var(--accent-gold);
+            transform: scale(1.25);
+            width: 28px;
+            border-radius: 10px;
+        }
+
+        /* ==================== COUNTDOWN SECTION ==================== */
+        .countdown-section {
+            padding: 90px 20px;
+            background: linear-gradient(180deg, #ffffff 0%, var(--bg-soft) 100%);
+            text-align: center;
+        }
+
+        .countdown-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .timer-card {
+            background: #ffffff;
+            border-radius: var(--border-radius);
+            padding: 24px 18px;
+            min-width: 130px;
+            flex: 1;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            transition: var(--transition-smooth);
+        }
+
+        .timer-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+        }
+
+        .timer-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--primary-navy);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .timer-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--muted-slate);
+        }
+
+        /* ==================== SAVE TO CALENDAR SECTION ==================== */
+        .calendar-section {
+            padding: 80px 20px;
+            background-color: #ffffff;
+        }
+
+        .calendar-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-soft);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            border: 1px solid rgba(59, 77, 102, 0.1);
+            box-shadow: var(--card-shadow);
+        }
+
+        .calendar-options {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        /* ==================== GOOGLE MAPS NAVIGATION ==================== */
+        .maps-section {
+            padding: 90px 20px;
+            background-color: var(--bg-soft);
+        }
+
+        .maps-container {
+            max-width: 950px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 30px;
+            background: #ffffff;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .venue-info {
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .venue-name {
+            font-size: 1.8rem;
+            color: var(--primary-navy);
+            margin-bottom: 15px;
+        }
+
+        .venue-detail {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 15px;
+            color: var(--secondary-slate);
+            font-size: 1rem;
+        }
+
+        .venue-icon {
+            font-size: 1.3rem;
+            color: var(--accent-gold);
+            margin-top: 2px;
+        }
+
+        .map-frame-wrapper {
+            position: relative;
+            min-height: 320px;
+            width: 100%;
+        }
+
+        .map-frame-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            min-height: 320px;
+        }
+
+        /* ==================== LIVE RSVP TRACKING SECTION ==================== */
+        .rsvp-section {
+            padding: 90px 20px;
+            background: #ffffff;
+        }
+
+        .rsvp-container {
+            max-width: 720px;
+            margin: 0 auto;
+            background: var(--bg-soft);
+            border-radius: 24px;
+            padding: 45px 35px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(197, 160, 89, 0.3);
+        }
+
+        .rsvp-counter-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(197, 160, 89, 0.15);
+            color: var(--primary-navy);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        .rsvp-counter-badge span {
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+
+        .rsvp-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: left;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary-navy);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 10px;
+            border: 1px solid rgba(59, 77, 102, 0.2);
+            background: #ffffff;
+            font-family: 'Lora', serif;
+            font-size: 1rem;
+            color: var(--primary-navy);
+            transition: var(--transition-smooth);
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.2);
+        }
+
+        .attendance-radio-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .radio-option {
+            flex: 1;
+            position: relative;
+        }
+
+        .radio-option input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            background: #ffffff;
+            border: 1px solid rgba(59, 77, 102, 0.2);
+            border-radius: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--secondary-slate);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .radio-option input:checked+.radio-label {
+            background-color: var(--primary-navy);
+            color: #ffffff;
+            border-color: var(--primary-navy);
+        }
+
+        .rsvp-success-message {
+            display: none;
+            padding: 20px;
+            background: #e8f5e9;
+            border: 1px solid #a5d6a7;
+            color: #2e7d32;
+            border-radius: 12px;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            margin-top: 15px;
+        }
+
+        /* ==================== ITINERARY SECTION ==================== */
+        .event-details {
+            padding: 90px 20px;
+            background: var(--bg-soft);
+            text-align: center;
+        }
+
+        .simple-schedule {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        .schedule-item {
+            background: #ffffff;
+            padding: 20px 30px;
+            border-radius: 14px;
+            width: 100%;
+            box-shadow: var(--card-shadow);
+        }
+
+        .schedule-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+
+        .schedule-item p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent-gold);
+        }
+
+        .schedule-divider {
+            height: 25px;
+            width: 2px;
+            background-color: var(--accent-gold);
+            opacity: 0.4;
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            padding: 40px 20px;
+            background: var(--primary-navy);
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer h3 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        /* ==================== FLOATING MUSIC PLAYER ==================== */
+        .music-btn {
+            position: fixed;
+            bottom: 26px;
+            right: 22px;
+            z-index: 999;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: var(--primary-navy);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-gold);
+            border: 2px solid var(--accent-gold);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .music-btn:hover {
+            transform: scale(1.08);
+        }
+
+        .music-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .music-btn .icon-speaker {
+            display: none;
+        }
+
+        .music-btn .icon-mute {
+            display: block;
+        }
+
+        .music-btn.playing .icon-speaker {
+            display: block;
+        }
+
+        .music-btn.playing .icon-mute {
+            display: none;
+        }
+
+        .music-note {
+            position: absolute;
+            top: -6px;
+            right: -2px;
+            font-size: 0.8rem;
+            color: var(--accent-gold);
+            opacity: 0;
+        }
+
+        .music-btn.playing .music-note {
+            animation: noteFloat 2.2s ease-in infinite;
+        }
+
+        @keyframes noteFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(0) translateX(0);
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-26px) translateX(10px);
+            }
+        }
+
+        /* ==================== RESPONSIVE MEDIA QUERIES ==================== */
+        @media (max-width: 850px) {
+            .maps-container {
+                grid-template-columns: 1fr;
+            }
+
+            .map-frame-wrapper {
+                min-height: 280px;
+            }
+
+            .carousel-track-container {
+                height: 380px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-overlay-card {
+                padding: 35px 20px;
+            }
+
+            .hero-details-grid {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .countdown-grid {
+                gap: 12px;
+            }
+
+            .timer-card {
+                min-width: 42%;
+                padding: 16px 10px;
+            }
+
+            .timer-number {
+                font-size: 2.2rem;
+            }
+
+            .section-title {
+                font-size: 2.8rem;
+            }
+
+            .attendance-radio-group {
+                flex-direction: column;
+            }
+
+            .carousel-track-container {
+                height: 280px;
+            }
+
+            .carousel-btn {
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HERO SECTION REDESIGN -->
+    <section class="hero" id="hero">
+        <div class="hero-overlay-card slide-up">
+
+            <p class="hero-intro">Together With Their Families</p>
+            <h1 class="hero-names">Olivia & Daniel</h1>
+            <p class="hero-tagline">joyfully invite you to celebrate their wedding day</p>
+
+            <div class="hero-details-grid">
+                <div class="hero-detail-item">
+                    <span class="hero-detail-icon">📅</span>
+                    <span>Saturday, June 17, 2028</span>
+                </div>
+                <div class="hero-detail-item">
+                    <span class="hero-detail-icon">🕒</span>
+                    <span>4:00 PM</span>
+                </div>
+                <div class="hero-detail-item">
+                    <span class="hero-detail-icon">📍</span>
+                    <span>Borcelle Ballroom</span>
+                </div>
+            </div>
+
+            <div class="hero-actions">
+                <a href="#rsvp" class="btn btn-primary">⚡ RSVP Now</a>
+                <a href="#gallery" class="btn btn-secondary">📷 Our Gallery</a>
+                <a href="#calendar" class="btn btn-secondary">📅 Save Date</a>
+                <a href="#location" class="btn btn-secondary">📍 Directions</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHOTO CAROUSEL SECTION -->
+    <section class="gallery-section" id="gallery">
+        <span class="section-badge slide-up">Our Moments</span>
+        <h2 class="section-title slide-up">Pre-Wedding Photo Gallery</h2>
+        <p class="section-subtitle slide-up">A glimpse into our journey of love, laughter, and togetherness.</p>
+
+        <div class="carousel-wrapper slide-up" id="carouselWrapper">
+            <div class="carousel-track-container">
+                <div class="carousel-slide active">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80"
+                        alt="Olivia & Daniel - Our First Chapter" loading="lazy">
+                    <div class="carousel-caption">Our First Chapter • Hand in Hand</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=1200&q=80"
+                        alt="The Proposal" loading="lazy">
+                    <div class="carousel-caption">The Proposal • A Promise of Forever</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=80"
+                        alt="Pre-Wedding Celebration" loading="lazy">
+                    <div class="carousel-caption">Pre-Wedding Joy • Cherishing Every Moment</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80"
+                        alt="Celebration of Love" loading="lazy">
+                    <div class="carousel-caption">Celebration of Love • Counting Down the Days</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=80"
+                        alt="Golden Hour Memories" loading="lazy">
+                    <div class="carousel-caption">Golden Hour • Ready to Say I Do</div>
+                </div>
+            </div>
+
+            <button class="carousel-btn carousel-btn-prev" id="prevBtn" aria-label="Previous Slide">❮</button>
+            <button class="carousel-btn carousel-btn-next" id="nextBtn" aria-label="Next Slide">❯</button>
+        </div>
+
+        <div class="carousel-indicators slide-up" id="carouselIndicators">
+            <button class="carousel-dot active" data-slide="0" aria-label="Slide 1"></button>
+            <button class="carousel-dot" data-slide="1" aria-label="Slide 2"></button>
+            <button class="carousel-dot" data-slide="2" aria-label="Slide 3"></button>
+            <button class="carousel-dot" data-slide="3" aria-label="Slide 4"></button>
+            <button class="carousel-dot" data-slide="4" aria-label="Slide 5"></button>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE COUNTDOWN TIMER SECTION -->
+    <section class="countdown-section" id="countdown">
+        <div class="container">
+            <span class="section-badge slide-up">Build Excitement</span>
+            <h2 class="section-title slide-up">Counting Down to the Big Day</h2>
+            <p class="section-subtitle slide-up">Every second brings us closer to celebrating our love together with
+                you!</p>
+
+            <div class="countdown-grid slide-up">
+                <div class="timer-card">
+                    <div class="timer-number" id="timer-days">00</div>
+                    <div class="timer-label">Days</div>
+                </div>
+                <div class="timer-card">
+                    <div class="timer-number" id="timer-hours">00</div>
+                    <div class="timer-label">Hours</div>
+                </div>
+                <div class="timer-card">
+                    <div class="timer-number" id="timer-minutes">00</div>
+                    <div class="timer-label">Minutes</div>
+                </div>
+                <div class="timer-card">
+                    <div class="timer-number" id="timer-seconds">00</div>
+                    <div class="timer-label">Seconds</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SAVE TO CALENDAR SECTION -->
+    <section class="calendar-section" id="calendar">
+        <div class="calendar-card slide-up">
+            <span class="section-badge">Save to Calendar</span>
+            <h2 class="section-title" style="font-size: 3rem;">Don't Miss the Celebration</h2>
+            <p class="section-subtitle" style="margin-bottom: 25px;">Instantly add Olivia & Daniel's wedding to your
+                personal calendar so you don't miss a moment.</p>
+
+            <div class="calendar-options">
+                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Olivia+%26+Daniel%27s+Wedding&dates=20280617T160000Z/20280617T220000Z&details=Join+us+for+an+evening+of+love%2C+laughter%2C+and+celebration+at+the+wedding+of+Olivia+and+Daniel!&location=Borcelle+Ballroom%2C+123+Celebration+Blvd&sf=true&output=xml"
+                    target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h5v5h-5z" />
+                    </svg>
+                    Google Calendar
+                </a>
+
+                <button onclick="downloadICS()" class="btn btn-secondary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" />
+                    </svg>
+                    Apple / Outlook (.ics)
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- GOOGLE MAPS NAVIGATION SECTION -->
+    <section class="maps-section" id="location">
+        <div class="section-title slide-up" style="text-align: center;">Venue & Directions</div>
+        <p class="section-subtitle slide-up">We can't wait to welcome you to our wedding venue</p>
+
+        <div class="maps-container slide-up">
+            <div class="venue-info">
+                <span class="section-badge">Location Details</span>
+                <h3 class="venue-name">Borcelle Ballroom</h3>
+
+                <div class="venue-detail">
+                    <span class="venue-icon">📍</span>
+                    <div>
+                        <strong>Address:</strong><br>
+                        123 Celebration Boulevard, Grand City
+                    </div>
+                </div>
+
+                <div class="venue-detail">
+                    <span class="venue-icon">🕒</span>
+                    <div>
+                        <strong>Ceremony Start:</strong><br>
+                        Saturday, June 17, 2028 at 4:00 PM
+                    </div>
+                </div>
+
+                <div class="venue-detail" style="margin-bottom: 25px;">
+                    <span class="venue-icon">🅿️</span>
+                    <div>
+                        <strong>Guest Parking:</strong><br>
+                        Complimentary valet parking available at venue entrance.
+                    </div>
+                </div>
+
+                <a href="https://maps.google.com/?q=Borcelle+Ballroom" target="_blank" rel="noopener noreferrer"
+                    class="btn btn-primary" style="align-self: flex-start;">
+                    📍 Get Directions in Google Maps
+                </a>
+            </div>
+
+            <div class="map-frame-wrapper">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.2177073222374!2d-73.98823968459377!3d40.75549007932681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259ac1741b4e7%3A0x81b5c464a754f9d0!2sTimes%20Square!5e0!3m2!1sen!2sus!4v1680000000000!5m2!1sen!2sus"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIVE RSVP TRACKING SECTION -->
+    <section class="rsvp-section" id="rsvp">
+        <div class="rsvp-container slide-up">
+            <div style="text-align: center;">
+                <span class="section-badge">Live RSVP Tracking</span>
+                <h2 class="section-title">Confirm Attendance</h2>
+                <p class="section-subtitle" style="margin-bottom: 20px;">Please confirm your attendance by May 15, 2028.
+                </p>
+
+                <div class="rsvp-counter-badge">
+                    🎉 <span id="confirmed-counter">148</span> Guests Already Confirmed!
+                </div>
+            </div>
+
+            <form class="rsvp-form" id="rsvpForm">
+                <div class="form-group">
+                    <label for="guestName">Full Name(s)</label>
+                    <input type="text" id="guestName" class="form-input" placeholder="e.g. John & Sarah Smith" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Will You Be Attending?</label>
+                    <div class="attendance-radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="attendYes" name="attendance" value="yes" checked>
+                            <label for="attendYes" class="radio-label">Joyfully Accept ✨</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="attendNo" name="attendance" value="no">
+                            <label for="attendNo" class="radio-label">Regretfully Decline 💌</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" id="guestCountGroup">
+                    <label for="guestCount">Number of Attending Guests</label>
+                    <select id="guestCount" class="form-select">
+                        <option value="1">1 Guest</option>
+                        <option value="2" selected>2 Guests</option>
+                        <option value="3">3 Guests</option>
+                        <option value="4">4 Guests</option>
+                        <option value="5">5 Guests</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="dietary">Dietary Preferences / Warm Wishes</label>
+                    <textarea id="dietary" class="form-textarea" rows="3"
+                        placeholder="Let us know any food allergies or leave a note for Olivia & Daniel..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px; font-size: 1rem;">
+                    Submit RSVP
+                </button>
+            </form>
+
+            <div class="rsvp-success-message" id="rsvpSuccess">
+                💖 Thank you for confirming! We can't wait to celebrate with you on June 17, 2028!
+            </div>
+        </div>
+    </section>
+
+    <!-- WEDDING ITINERARY SECTION -->
+    <section class="event-details" id="itinerary">
+        <span class="section-badge slide-up">Schedule of Events</span>
+        <h2 class="section-title slide-up">Wedding Itinerary</h2>
+
+        <div class="simple-schedule">
+            <div class="schedule-item slide-up">
+                <h3>Welcome & Guest Seating</h3>
+                <p>3:30 PM</p>
+            </div>
+
+            <div class="schedule-divider slide-up"></div>
+
+            <div class="schedule-item slide-up">
+                <h3>Wedding Ceremony</h3>
+                <p>4:00 PM</p>
+            </div>
+
+            <div class="schedule-divider slide-up"></div>
+
+            <div class="schedule-item slide-up">
+                <h3>Dinner & Reception Party</h3>
+                <p>6:00 PM</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <h3>Olivia & Daniel</h3>
+        <p>June 17, 2028 • Borcelle Ballroom</p>
+        <p style="margin-top: 10px; opacity: 0.6; font-size: 0.8rem;">We look forward to seeing you!</p>
+    </footer>
+
+    <!-- FLOATING MUSIC PLAYER -->
+    <button class="music-btn" id="musicBtn" aria-label="Toggle background music">
+        <span class="music-note">♪</span>
+        <!-- Mute Icon -->
+        <svg class="icon-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+                d="M22 9L16 15M16 9L22 15M3 10.5V13.5C3 14.6 3.5 15.5 5.5 16C7.5 16.5 9 21 12 21C14 21 14 3 12 3C9 3 7.5 7.5 5.5 8C3.5 8.5 3 9.4 3 10.5Z" />
+        </svg>
+        <!-- Speaker Icon -->
+        <svg class="icon-speaker" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+                d="M19 6C20.5 7.5 21 10 21 12C21 14 20.5 16.5 19 18M16 9C16.5 9.5 17 10.5 17 12C17 13.5 16.5 14.5 16 15M3 10.5V13.5C3 14.6 3.5 15.5 5.5 16C7.5 16.5 9 21 12 21C14 21 14 3 12 3C9 3 7.5 7.5 5.5 8C3.5 8.5 3 9.4 3 10.5Z" />
+        </svg>
+    </button>
+    <audio id="bgMusic" loop preload="auto">
+        <source src="music/leberch-invitation-wedding-375839.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- SCRIPTS -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            /* ==================== INTERSECTION OBSERVER ANIMATIONS ==================== */
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.slide-up').forEach(el => {
+                observer.observe(el);
+            });
+
+            /* ==================== PHOTO CAROUSEL LOGIC ==================== */
+            const slides = document.querySelectorAll('.carousel-slide');
+            const dots = document.querySelectorAll('.carousel-dot');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const carouselWrapper = document.getElementById('carouselWrapper');
+
+            let currentSlide = 0;
+            let slideInterval;
+
+            function goToSlide(index) {
+                slides[currentSlide].classList.remove('active');
+                dots[currentSlide].classList.remove('active');
+                currentSlide = (index + slides.length) % slides.length;
+                slides[currentSlide].classList.add('active');
+                dots[currentSlide].classList.add('active');
+            }
+
+            function nextSlide() {
+                goToSlide(currentSlide + 1);
+            }
+
+            function prevSlide() {
+                goToSlide(currentSlide - 1);
+            }
+
+            if (prevBtn && nextBtn) {
+                prevBtn.addEventListener('click', () => {
+                    prevSlide();
+                    resetTimer();
+                });
+
+                nextBtn.addEventListener('click', () => {
+                    nextSlide();
+                    resetTimer();
+                });
+            }
+
+            dots.forEach(dot => {
+                dot.addEventListener('click', function () {
+                    const slideIndex = parseInt(this.getAttribute('data-slide'), 10);
+                    goToSlide(slideIndex);
+                    resetTimer();
+                });
+            });
+
+            function startTimer() {
+                slideInterval = setInterval(nextSlide, 4500);
+            }
+
+            function resetTimer() {
+                clearInterval(slideInterval);
+                startTimer();
+            }
+
+            if (carouselWrapper) {
+                carouselWrapper.addEventListener('mouseenter', () => clearInterval(slideInterval));
+                carouselWrapper.addEventListener('mouseleave', () => startTimer());
+            }
+
+            startTimer();
+
+            /* ==================== INTERACTIVE COUNTDOWN TIMER ==================== */
+            const weddingDate = new Date("June 17, 2028 16:00:00").getTime();
+
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = weddingDate - now;
+
+                if (distance < 0) {
+                    document.getElementById("timer-days").innerText = "00";
+                    document.getElementById("timer-hours").innerText = "00";
+                    document.getElementById("timer-minutes").innerText = "00";
+                    document.getElementById("timer-seconds").innerText = "00";
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("timer-days").innerText = String(days).padStart(2, '0');
+                document.getElementById("timer-hours").innerText = String(hours).padStart(2, '0');
+                document.getElementById("timer-minutes").innerText = String(minutes).padStart(2, '0');
+                document.getElementById("timer-seconds").innerText = String(seconds).padStart(2, '0');
+            }
+
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+
+            /* ==================== LIVE RSVP TRACKING & FORM ==================== */
+            let currentConfirmed = 148;
+            const rsvpForm = document.getElementById('rsvpForm');
+            const rsvpSuccess = document.getElementById('rsvpSuccess');
+            const confirmedCounter = document.getElementById('confirmed-counter');
+            const attendYesRadio = document.getElementById('attendYes');
+            const attendNoRadio = document.getElementById('attendNo');
+            const guestCountGroup = document.getElementById('guestCountGroup');
+
+            attendYesRadio.addEventListener('change', () => guestCountGroup.style.display = 'flex');
+            attendNoRadio.addEventListener('change', () => guestCountGroup.style.display = 'none');
+
+            rsvpForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const isAttending = attendYesRadio.checked;
+                const addedGuests = isAttending ? parseInt(document.getElementById('guestCount').value, 10) : 0;
+
+                if (isAttending) {
+                    currentConfirmed += addedGuests;
+                    confirmedCounter.innerText = currentConfirmed;
+                    confirmedCounter.style.transform = 'scale(1.3)';
+                    setTimeout(() => confirmedCounter.style.transform = 'scale(1)', 400);
+                }
+
+                rsvpForm.style.display = 'none';
+                rsvpSuccess.style.display = 'block';
+            });
+
+            /* ==================== BACKGROUND MUSIC PLAYER ==================== */
+            const musicBtn = document.getElementById('musicBtn');
+            const bgMusic = document.getElementById('bgMusic');
+
+            if (musicBtn && bgMusic) {
+                musicBtn.addEventListener('click', () => {
+                    if (bgMusic.paused) {
+                        bgMusic.play().then(() => {
+                            musicBtn.classList.add('playing');
+                        }).catch((err) => {
+                            console.error('Audio playback error:', err);
+                        });
+                    } else {
+                        bgMusic.pause();
+                        musicBtn.classList.remove('playing');
+                    }
+                });
+            }
+        });
+
+        /* ==================== SAVE TO CALENDAR (.ICS GENERATOR) ==================== */
+        function downloadICS() {
+            const icsData = [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//Olivia and Daniel Wedding//NONSGML v1.0//EN',
+                'BEGIN:VEVENT',
+                'SUMMARY:Olivia & Daniel\'s Wedding',
+                'DESCRIPTION:Join us for an evening of love, laughter, and celebration!',
+                'LOCATION:Borcelle Ballroom, 123 Celebration Boulevard',
+                'DTSTART:20280617T160000Z',
+                'DTEND:20280617T220000Z',
+                'END:VEVENT',
+                'END:VCALENDAR'
+            ].join('\n');
+
+            const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.setAttribute('download', 'Olivia_and_Daniel_Wedding.ics');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+
+</html>
