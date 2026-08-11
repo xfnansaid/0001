@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sreelakshmi & Vijay | Wedding Celebration Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Marcellus&family=Noto+Serif+Malayalam:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- GSAP & ScrollTrigger Animation Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    /* music toggle */
+    .music-btn {
+      position: fixed;
+      bottom: 26px;
+      right: 22px;
+      z-index: 600;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--bg-silk);
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-light);
+    }
+
+    .music-btn svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .music-btn .icon-speaker {
+      display: none;
+    }
+
+    .music-btn .icon-mute {
+      display: block;
+    }
+
+    .music-btn.playing .icon-speaker {
+      display: block;
+    }
+
+    .music-btn.playing .icon-mute {
+      display: none;
+    }
+
+    @keyframes flicker {
+
+      0%,
+      100% {
+        transform: scaleY(1) rotate(0deg);
+      }
+
+      30% {
+        transform: scaleY(1.12) rotate(-2deg);
+      }
+
+      60% {
+        transform: scaleY(0.92) rotate(2deg);
+      }
+    }
+
+    .music-note {
+      position: absolute;
+      top: -6px;
+      right: -2px;
+      font-size: 0.6rem;
+      color: var(--gold-light);
+      opacity: 0;
+    }
+
+    .music-btn.playing .music-note {
+      animation: noteFloat 2.2s ease-in infinite;
+    }
+
+    @keyframes noteFloat {
+      0% {
+        opacity: 0;
+        transform: translateY(0) translateX(0);
+      }
+
+      15% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateY(-26px) translateX(8px);
+      }
+    }
+
+    :root {
+      --bg-silk: #FAF7F2;
+      --bg-alt: #F3EFEA;
+      --gold: #B89758;
+      --gold-light: #DFD3BA;
+      --burgundy: #5E2129;
+      --burgundy-deep: #3A1218;
+      --sage: #3D5A47;
+      --charcoal: #2C2A29;
+      --text-muted: #6C6863;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-silk);
+      color: var(--charcoal);
+      font-family: 'Cormorant Garamond', serif;
+      overflow-x: hidden;
+      position: relative;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.03;
+      background-image: radial-gradient(var(--gold) 0.75px, transparent 0.75px), radial-gradient(var(--gold) 0.75px, var(--bg-silk) 0.75px);
+      background-size: 30px 30px;
+      background-position: 0 0, 15px 15px;
+    }
+
+    section {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ---------- FALLING PETALS & SPARKLES ---------- */
+    .petals,
+    .sparkles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .petal {
+      position: absolute;
+      top: -40px;
+      width: 10px;
+      height: 14px;
+      background: linear-gradient(135deg, #EAD5D7, var(--gold-light));
+      border-radius: 15% 85% 15% 85%;
+      opacity: 0.4;
+      animation: fall linear infinite;
+    }
+
+    .petal:nth-child(1) {
+      left: 10%;
+      animation-duration: 18s;
+      animation-delay: 0s;
+    }
+
+    .petal:nth-child(2) {
+      left: 25%;
+      animation-duration: 22s;
+      animation-delay: 3s;
+    }
+
+    .petal:nth-child(3) {
+      left: 45%;
+      animation-duration: 16s;
+      animation-delay: 1s;
+    }
+
+    .petal:nth-child(4) {
+      left: 65%;
+      animation-duration: 20s;
+      animation-delay: 4s;
+    }
+
+    .petal:nth-child(5) {
+      left: 80%;
+      animation-duration: 19s;
+      animation-delay: 2s;
+    }
+
+    .petal:nth-child(6) {
+      left: 92%;
+      animation-duration: 24s;
+      animation-delay: 5s;
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background-color: var(--gold);
+      border-radius: 50%;
+      opacity: 0;
+      animation: glimmer 4s ease-in-out infinite;
+    }
+
+    .sparkle:nth-child(1) {
+      top: 20%;
+      left: 15%;
+      animation-delay: 0.5s;
+    }
+
+    .sparkle:nth-child(2) {
+      top: 35%;
+      left: 85%;
+      animation-delay: 1.2s;
+    }
+
+    .sparkle:nth-child(3) {
+      top: 60%;
+      left: 25%;
+      animation-delay: 2.5s;
+    }
+
+    .sparkle:nth-child(4) {
+      top: 75%;
+      left: 70%;
+      animation-delay: 0.8s;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg) scale(0.8);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 0.5;
+      }
+
+      90% {
+        opacity: 0.5;
+      }
+
+      100% {
+        transform: translateY(105vh) rotate(360deg) scale(1);
+        opacity: 0;
+      }
+    }
+
+    @keyframes glimmer {
+
+      0%,
+      100% {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+
+      50% {
+        transform: scale(1.5);
+        opacity: 0.6;
+        box-shadow: 0 0 8px var(--gold);
+      }
+    }
+
+    /* ---------- HANGING BELLS ---------- */
+    .bell-row {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 80px;
+      padding: 0 20px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .bell-row svg {
+      width: 16px;
+      opacity: 0.6;
+    }
+
+    .bell {
+      animation: sway 4s ease-in-out infinite;
+      transform-origin: top center;
+    }
+
+    .bell-row svg:nth-child(2) .bell {
+      animation-delay: 0.5s;
+    }
+
+    .bell-row svg:nth-child(3) .bell {
+      animation-delay: 1s;
+    }
+
+    @keyframes sway {
+
+      0%,
+      100% {
+        transform: rotate(-3deg);
+      }
+
+      50% {
+        transform: rotate(3deg);
+      }
+    }
+
+    /* ---------- SECTION 1: HERO ---------- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 90px 24px 70px;
+      position: relative;
+    }
+
+    .hero-frame {
+      position: absolute;
+      top: 30px;
+      bottom: 30px;
+      left: 30px;
+      right: 30px;
+      border: 1px solid var(--gold-light);
+      border-top-left-radius: 180px;
+      border-top-right-radius: 180px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-frame::before {
+      content: "";
+      position: absolute;
+      top: 8px;
+      bottom: 8px;
+      left: 8px;
+      right: 8px;
+      border: 0.5px solid rgba(184, 151, 88, 0.3);
+      border-top-left-radius: 172px;
+      border-top-right-radius: 172px;
+    }
+
+    .monogram {
+      width: 64px;
+      height: 64px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Marcellus', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      margin-bottom: 24px;
+      background: rgba(250, 247, 242, 0.8);
+      box-shadow: 0 4px 15px rgba(184, 151, 88, 0.15);
+    }
+
+    .eyebrow-mal {
+      font-family: 'Noto Serif Malayalam', serif;
+      color: var(--burgundy);
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .eyebrow-en {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 30px;
+      font-weight: 500;
+    }
+
+    .names-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 10px 0;
+    }
+
+    .names {
+      font-family: 'Marcellus', serif;
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      line-height: 1.05;
+      color: var(--burgundy-deep);
+      letter-spacing: -0.5px;
+      font-weight: 400;
+    }
+
+    .parents-note {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      margin: 4px 0 16px;
+      text-transform: uppercase;
+    }
+
+    .amp-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin: 12px 0;
+    }
+
+    .amp-row .lamp {
+      width: 32px;
+    }
+
+    .peacock {
+      width: 36px;
+      opacity: 0.85;
+    }
+
+    .peacock.flip {
+      transform: scaleX(-1);
+    }
+
+    .flame {
+      animation: flicker 2s ease-in-out infinite;
+      transform-origin: center bottom;
+    }
+
+    @keyframes flicker {
+
+      0%,
+      100% {
+        transform: scaleY(1) scaleX(1);
+        opacity: 0.9;
+      }
+
+      50% {
+        transform: scaleY(1.06) scaleX(0.96);
+        opacity: 1;
+      }
+    }
+
+    .tagline {
+      margin-top: 30px;
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--charcoal);
+      max-width: 480px;
+      line-height: 1.6;
+    }
+
+    .tagline-mal {
+      font-family: 'Noto Serif Malayalam', serif;
+      font-size: 1rem;
+      color: var(--burgundy);
+      margin-top: 12px;
+    }
+
+    .line-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 28px 0;
+    }
+
+    .line-divider span {
+      width: 40px;
+      height: 1px;
+      background-color: var(--gold-light);
+    }
+
+    .line-divider i {
+      width: 4px;
+      height: 4px;
+      background-color: var(--gold);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .scroll-cue svg {
+      animation: bounce 2s infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      20%,
+      50%,
+      80%,
+      100% {
+        transform: translateY(0);
+      }
+
+      40% {
+        transform: translateY(-5px);
+      }
+
+      60% {
+        transform: translateY(-3px);
+      }
+    }
+
+    /* ---------- SECTION 2: OUR STORY (GSAP ANIMATION READY) ---------- */
+    .story-section {
+      padding: 120px 24px;
+      background-color: var(--bg-alt);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+      /* Prevents overflow during scaling animation */
+    }
+
+    .section-title {
+      font-family: 'Marcellus', serif;
+      color: var(--burgundy-deep);
+      font-size: clamp(2rem, 5vw, 2.6rem);
+      margin-bottom: 8px;
+    }
+
+    .section-subtitle {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 50px;
+      font-weight: 600;
+    }
+
+    /* Modified Container for the Scroll Expand Animation */
+    .photo-frame-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 50px;
+      perspective: 1000px;
+    }
+
+    .photo-frame-placeholder {
+      width: 100%;
+      max-width: 680px;
+      /* Increased max-width so it grows larger on reveal */
+      height: 520px;
+      border: 1px solid var(--gold);
+      padding: 16px;
+      position: relative;
+      background: #FFF;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08);
+      border-radius: 8px;
+      will-change: transform, width, height;
+      /* Optimizes browser rendering for GSAP */
+    }
+
+    .photo-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      background-color: var(--gold-light);
+      border-radius: 4px;
+    }
+
+    .photo-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Subtle zoom on hover once expanded */
+    .photo-frame-placeholder:hover .photo-inner img {
+      transform: scale(1.05);
+    }
+
+    .story-text {
+      max-width: 620px;
+      font-size: 1.25rem;
+      line-height: 1.8;
+      color: var(--charcoal);
+      margin-bottom: 24px;
+    }
+
+    /* ---------- SECTION 3: EVENTS TIMELINE ---------- */
+    .timeline-section {
+      padding: 100px 24px;
+      background-color: var(--bg-silk);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      width: 100%;
+      max-width: 960px;
+      margin-top: 20px;
+    }
+
+    .event-card {
+      background: #FFF;
+      border: 1px solid rgba(184, 151, 88, 0.25);
+      padding: 40px 28px;
+      text-align: center;
+      border-radius: 8px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .event-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(94, 33, 41, 0.06);
+    }
+
+    .event-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .event-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--burgundy);
+    }
+
+    .event-title {
+      font-family: 'Marcellus', serif;
+      font-size: 1.5rem;
+      color: var(--burgundy-deep);
+      margin-bottom: 8px;
+    }
+
+    .event-time {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .event-desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ---------- SECTION 4: DETAILS & COUNTDOWN ---------- */
+    .details {
+      padding: 100px 24px 110px;
+      background-color: var(--bg-alt);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .info-card {
+      width: 100%;
+      max-width: 560px;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(184, 151, 88, 0.3);
+      border-radius: 12px;
+      padding: 44px 36px;
+      margin: 20px 0 50px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.03);
+    }
+
+    .info-row {
+      display: flex;
+      flex-direction: column;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(184, 151, 88, 0.15);
+    }
+
+    .info-row:first-child {
+      padding-top: 0;
+    }
+
+    .info-row:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .info-label {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .info-value {
+      font-size: 1.4rem;
+      color: var(--charcoal);
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+    }
+
+    .info-value small {
+      display: block;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .countdown-label {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      font-weight: 500;
+    }
+
+    .countdown {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 50px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cd-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 70px;
+    }
+
+    .cd-num {
+      font-family: 'Marcellus', serif;
+      font-size: clamp(2.2rem, 6vw, 3rem);
+      color: var(--burgundy-deep);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .cd-lbl {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .cd-separator {
+      font-family: 'Marcellus', serif;
+      font-size: 2rem;
+      color: var(--gold-light);
+      align-self: flex-start;
+      margin-top: 4px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .cta-btn {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #FFF;
+      background: var(--burgundy);
+      border: none;
+      padding: 18px 36px;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(94, 33, 41, 0.2);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .cta-btn:hover {
+      background: var(--burgundy-deep);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(94, 33, 41, 0.3);
+    }
+
+    .cta-btn-alt {
+      background: transparent;
+      color: var(--burgundy);
+      border: 1px solid var(--burgundy);
+      box-shadow: none;
+    }
+
+    .cta-btn-alt:hover {
+      background: rgba(94, 33, 41, 0.05);
+      box-shadow: 0 10px 20px rgba(94, 33, 41, 0.1);
+    }
+
+    .cta-note {
+      margin-top: 14px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      width: 100%;
+    }
+
+    /* ---------- FOOTER ---------- */
+    .footer {
+      padding: 60px 24px;
+      background-color: var(--burgundy-deep);
+      color: var(--bg-silk);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-family: 'Marcellus', serif;
+      font-size: 2rem;
+      color: var(--gold-light);
+      margin-bottom: 16px;
+    }
+
+    .footer-mark {
+      font-family: 'Noto Serif Malayalam', serif;
+      color: var(--gold-light);
+      font-size: 1.1rem;
+      margin-bottom: 24px;
+    }
+
+    .footer-sub {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.75rem;
+      color: rgba(250, 247, 242, 0.5);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 600px) {
+      .hero-frame {
+        top: 15px;
+        bottom: 15px;
+        left: 15px;
+        right: 15px;
+        border-top-left-radius: 120px;
+        border-top-right-radius: 120px;
+      }
+
+      .hero-frame::before {
+        border-top-left-radius: 112px;
+        border-top-right-radius: 112px;
+      }
+
+      .photo-frame-placeholder {
+        height: 380px;
+      }
+
+      .info-card {
+        padding: 32px 22px;
+      }
+
+      .countdown {
+        gap: 14px;
+      }
+
+      .cd-separator {
+        display: none;
+      }
+
+      .cd-unit {
+        min-width: 60px;
+      }
+
+      .btn-group {
+        flex-direction: column;
+        width: 100%;
+        max-width: 280px;
+      }
+
+      .cta-btn {
+        width: 100%;
+      }
+    }
+
+    /* ---------- SCROLL SLIDER TEXT BANNER ---------- */
+    .marquee-slider-container {
+      width: 100%;
+      overflow: hidden;
+      background: var(--burgundy-deep);
+      color: var(--gold-light);
+      padding: 16px 0;
+      border-top: 1px solid var(--gold);
+      border-bottom: 1px solid var(--gold);
+      white-space: nowrap;
+      position: relative;
+      z-index: 5;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .marquee-slider-track {
+      display: inline-flex;
+      gap: 32px;
+      font-family: 'Marcellus', serif;
+      font-size: 1.1rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      will-change: transform;
+    }
+
+    .marquee-slider-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .marquee-slider-item::after {
+      content: '✦';
+      color: var(--gold);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============ SECTION 1 : HERO ============ -->
+  <button class="music-btn" id="musicBtn" aria-label="Toggle background music">
+    <span class="music-note">♪</span>
+    <!-- Mute icon (shown when music is paused / initial state) -->
+
+    <svg class="icon-mute" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+      <g id="SVGRepo_iconCarrier">
+        <path
+          d="M22 9L16 15M16 9L22 15M3 10.5V13.5C3 14.6046 3.5 15.5 5.5 16C7.5 16.5 9 21 12 21C14 21 14 3 12 3C9 3 7.5 7.5 5.5 8C3.5 8.5 3 9.39543 3 10.5Z"
+          stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+      </g>
+    </svg>
+    <!-- Speaker icon (shown when music is playing) -->
+
+    <svg class="icon-speaker" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+      <g id="SVGRepo_iconCarrier">
+        <path
+          d="M19 6C20.5 7.5 21 10 21 12C21 14 20.5 16.5 19 18M16 8.99998C16.5 9.49998 17 10.5 17 12C17 13.5 16.5 14.5 16 15M3 10.5V13.5C3 14.6046 3.5 15.5 5.5 16C7.5 16.5 9 21 12 21C14 21 14 3 12 3C9 3 7.5 7.5 5.5 8C3.5 8.5 3 9.39543 3 10.5Z"
+          stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+      </g>
+    </svg>
+  </button>
+  <audio id="bgMusic" loop preload="auto">
+    <source src="music/leberch-invitation-wedding-375839.mp3" type="audio/mpeg">
+  </audio>
+
+  <section class="hero">
+    <div class="hero-frame" aria-hidden="true"></div>
+    <div class="petals" aria-hidden="true">
+      <span class="petal"></span><span class="petal"></span><span class="petal"></span>
+      <span class="petal"></span><span class="petal"></span><span class="petal"></span>
+    </div>
+    <div class="sparkles" aria-hidden="true">
+      <span class="sparkle"></span><span class="sparkle"></span>
+      <span class="sparkle"></span><span class="sparkle"></span>
+    </div>
+    <div class="bell-row" aria-hidden="true">
+      <svg viewBox="0 0 24 40" class="bell">
+        <path d="M12 0v6" stroke="#B89758" stroke-width="1" />
+        <path d="M6 10c0-4 3-6 6-6s6 2 6 6l2 10H4z" fill="#DFD3BA" />
+        <circle cx="12" cy="24" r="2" fill="#5E2129" />
+      </svg>
+      <svg viewBox="0 0 24 40" class="bell">
+        <path d="M12 0v6" stroke="#B89758" stroke-width="1" />
+        <path d="M6 10c0-4 3-6 6-6s6 2 6 6l2 10H4z" fill="#DFD3BA" />
+        <circle cx="12" cy="24" r="2" fill="#5E2129" />
+      </svg>
+      <svg viewBox="0 0 24 40" class="bell">
+        <path d="M12 0v6" stroke="#B89758" stroke-width="1" />
+        <path d="M6 10c0-4 3-6 6-6s6 2 6 6l2 10H4z" fill="#DFD3BA" />
+        <circle cx="12" cy="24" r="2" fill="#5E2129" />
+      </svg>
+    </div>
+    <div class="monogram" aria-label="Sreelakshmi & Vijay Monogram">S&V</div>
+    <p class="eyebrow-mal">വിവാഹ ക്ഷണം</p>
+    <p class="eyebrow-en">Wedding Invitation</p>
+
+    <div class="names-wrapper">
+      <h1 class="names">Sreelakshmi</h1>
+      <p class="parents-note">Daughter of Smt. Radhika & Sri. K. Narayanan</p>
+
+      <div class="amp-row">
+        <svg class="peacock" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+          <path d="M30 40c-4-10-2-20 4-26" stroke="#3D5A47" stroke-width="2.5" fill="none" stroke-linecap="round" />
+          <circle cx="35" cy="12" r="4" fill="#3D5A47" />
+          <circle cx="35" cy="12" r="1.5" fill="#B89758" />
+          <path d="M30 40c6-8 14-10 22-6M30 40c6-4 15-3 20 2" stroke="#B89758" stroke-width="1.5" fill="none"
+            stroke-linecap="round" />
+          <path d="M28 42c-3-3-9-3-12 0" stroke="#5E2129" stroke-width="2" fill="none" stroke-linecap="round" />
+        </svg>
+        <svg class="lamp" viewBox="0 0 60 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path class="flame" d="M30 8c5 7 6 12 2 17-2-2-4-2-6 0-3-5-2-11 4-17z" fill="#D4AF37" />
+          <ellipse cx="30" cy="34" rx="8" ry="4" fill="#B89758" />
+          <path d="M16 40h28l-3 8H19z" fill="#DFD3BA" />
+          <rect x="28" y="48" width="4" height="24" fill="#B89758" />
+          <ellipse cx="30" cy="74" rx="16" ry="4" fill="#DFD3BA" />
+        </svg>
+        <svg class="peacock flip" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+          <path d="M30 40c-4-10-2-20 4-26" stroke="#3D5A47" stroke-width="2.5" fill="none" stroke-linecap="round" />
+          <circle cx="35" cy="12" r="4" fill="#3D5A47" />
+          <circle cx="35" cy="12" r="1.5" fill="#B89758" />
+          <path d="M30 40c6-8 14-10 22-6M30 40c6-4 15-3 20 2" stroke="#B89758" stroke-width="1.5" fill="none"
+            stroke-linecap="round" />
+          <path d="M28 42c-3-3-9-3-12 0" stroke="#5E2129" stroke-width="2" fill="none" stroke-linecap="round" />
+        </svg>
+      </div>
+
+      <h1 class="names">Vijay</h1>
+      <p class="parents-note">Son of Smt. Lakshmi & Sri. R. Menon</p>
+    </div>
+
+    <p class="tagline">Together with their families, request the honour of your presence as they begin their journey as
+      one.</p>
+    <p class="tagline-mal">സ്നേഹപൂർവ്വം ക്ഷണിക്കുന്നു</p>
+
+    <div class="line-divider"><span></span><i></i><span></span></div>
+    <a href="#details" class="scroll-cue">
+      <span>Discover More</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+        <path d="M12 4v14M6 12l6 6 6-6" stroke="#B89758" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg>
+    </a>
+  </section>
+
+  <!-- ============ SCROLL SLIDER TEXT BANNER ============ -->
+  <div class="marquee-slider-container" aria-hidden="true">
+    <div class="marquee-slider-track">
+      <span class="marquee-slider-item">Sreelakshmi &amp; Vijay</span>
+      <span class="marquee-slider-item">Saturday, 12 September 2026</span>
+      <span class="marquee-slider-item">The Leela Raviz Kovalam</span>
+      <span class="marquee-slider-item">Thiruvananthapuram, Kerala</span>
+      <span class="marquee-slider-item">Sreelakshmi &amp; Vijay</span>
+      <span class="marquee-slider-item">Saturday, 12 September 2026</span>
+      <span class="marquee-slider-item">The Leela Raviz Kovalam</span>
+      <span class="marquee-slider-item">Thiruvananthapuram, Kerala</span>
+    </div>
+  </div>
+
+
+
+  <!-- ============ SECTION 4 : DETAILS + COUNTDOWN ============ -->
+  <section class="details" id="details">
+    <h2 class="section-title">Ceremony Details</h2>
+    <p class="section-subtitle">Important Information</p>
+    <div class="info-card">
+      <div class="info-row"><span class="info-label">Date</span><span class="info-value">Saturday, 12 September
+          2026</span></div>
+      <div class="info-row"><span class="info-label">Muhurtham</span><span class="info-value">8:00 AM<small>Ceremony
+            begins promptly at the auspicious hour</small></span></div>
+      <div class="info-row"><span class="info-label">Reception</span><span class="info-value">7:00 PM onwards</span>
+      </div>
+      <div class="info-row"><span class="info-label">Venue</span><span class="info-value">The Leela Raviz
+          Kovalam<small>Beach Road, Kovalam, Thiruvananthapuram, Kerala 695527</small></span></div>
+      <div class="info-row"><span class="info-label">Dress Code</span><span class="info-value"
+          style="font-size: 1.15rem;">Traditional Kerala Kasavu or Formal Ethnic</span></div>
+    </div>
+
+
+
+    <div class="btn-group">
+      <button class="cta-btn" id="save-date-btn">Save The Date</button>
+    </div>
+    <p class="cta-note">Save the date adds the wedding schedule directly to your calendar app</p>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer-logo">S & V</div>
+    <p class="footer-mark">സ്നേഹത്തോടെ, Sreelakshmi &amp; Vijay</p>
+    <p class="footer-sub">With blessings from families &amp; friends • September 2026</p>
+  </footer>
+
+  <!-- ============ JAVASCRIPT ANIMATIONS & LOGIC ============ -->
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // ---------- 1. GSAP Scroll-Driven Marquee Text Slider ----------
+    gsap.utils.toArray('.marquee-slider-track').forEach(track => {
+      gsap.to(track, {
+        xPercent: -40,
+        ease: "none",
+        scrollTrigger: {
+          trigger: track.parentElement,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 0.8
+        }
+      });
+    });
+
+    // ---------- 2. Hero Section Entrance Slide Animations ----------
+    gsap.from(".monogram", { y: -30, opacity: 0, duration: 1, ease: "power2.out" });
+    gsap.from(".names", { y: 40, opacity: 0, duration: 1.2, stagger: 0.2, ease: "power3.out", delay: 0.2 });
+    gsap.from(".eyebrow-mal, .eyebrow-en", { y: -20, opacity: 0, duration: 0.8, stagger: 0.15, delay: 0.1 });
+    gsap.from(".tagline, .tagline-mal", { y: 30, opacity: 0, duration: 1, stagger: 0.15, delay: 0.4 });
+
+    // ---------- 3. Section Titles & Subtitles Horizontal Slide-In ----------
+    gsap.utils.toArray('.section-title').forEach(title => {
+      gsap.from(title, {
+        x: -70,
+        opacity: 0,
+        duration: 1.1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: title,
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        }
+      });
+    });
+
+    gsap.utils.toArray('.section-subtitle').forEach(subtitle => {
+      gsap.from(subtitle, {
+        x: 70,
+        opacity: 0,
+        duration: 1.1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: subtitle,
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        }
+      });
+    });
+
+    // ---------- 4. GSAP ScrollTrigger Photo Expansion Animation ----------
+    if (document.getElementById("animated-photo-frame")) {
+      gsap.set("#animated-photo-frame", {
+        scale: 0.75,
+        opacity: 0.6,
+        y: 50
+      });
+
+      gsap.to("#animated-photo-frame", {
+        scale: 1,
+        opacity: 1,
+        y: 0,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: "#story",
+          start: "top 75%",
+          end: "top 25%",
+          scrub: 1,
+        }
+      });
+    }
+
+    // ---------- 5. Story Text Slide Up ----------
+    gsap.utils.toArray('.story-text').forEach(text => {
+      gsap.from(text, {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: text,
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        }
+      });
+    });
+
+    // ---------- 6. Event Timeline Cards Horizontal Slide-In Slider ----------
+    if (document.querySelectorAll('.event-card').length > 0) {
+      gsap.from('.event-card', {
+        x: (i) => (i % 2 === 0 ? -90 : 90),
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.25,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: '.timeline-grid',
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      });
+    }
+
+    // ---------- 7. Ceremony Info Rows Horizontal Staggered Slide ----------
+    if (document.querySelectorAll('.info-row').length > 0) {
+      gsap.from('.info-row', {
+        x: -60,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: '.info-card',
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      });
+    }
+
+    // ---------- 8. Countdown Units Scale & Slide-Up ----------
+    if (document.querySelectorAll('.cd-unit').length > 0) {
+      gsap.from('.cd-unit', {
+        scale: 0.75,
+        y: 35,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.12,
+        ease: "back.out(1.7)",
+        scrollTrigger: {
+          trigger: '#countdown',
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        }
+      });
+    }
+
+    // ---------- 9. CTA Buttons & Footer Slide Up ----------
+    gsap.utils.toArray('.btn-group').forEach(btnGroup => {
+      gsap.from(btnGroup, {
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: btnGroup,
+          start: "top 90%",
+          toggleActions: "play none none reverse"
+        }
+      });
+    });
+
+    // ---------- 2. Countdown Timer Logic ----------
+    const weddingDate = new Date("2026-09-12T08:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const diff = weddingDate - now;
+
+      if (isNaN(diff) || diff <= 0) {
+        document.getElementById('cd-days').textContent = "00";
+        document.getElementById('cd-hours').textContent = "00";
+        document.getElementById('cd-mins').textContent = "00";
+        document.getElementById('cd-secs').textContent = "00";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+      document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
+      document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // ---------- 3. Add to Calendar (.ics download) ----------
+    document.getElementById('save-date-btn').addEventListener('click', function () {
+      const icsContent = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//Sreelakshmi-Vijay-Wedding//EN",
+        "BEGIN:VEVENT",
+        "UID:" + Date.now() + "@wedding-invite",
+        "DTSTAMP:20260101T000000Z",
+        "DTSTART:20260912T080000",
+        "DTEND:20260912T220000",
+        "SUMMARY:Sreelakshmi & Vijay's Wedding",
+        "DESCRIPTION:Join us as Sreelakshmi and Vijay begin their journey together. Muhurtham at 8:00 AM, reception from 7:00 PM.",
+        "LOCATION:The Leela Raviz Kovalam, Thiruvananthapuram, Kerala",
+        "END:VEVENT",
+        "END:VCALENDAR"
+      ].join("\r\n");
+
+      const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "Sreelakshmi-Vijay-Wedding.ics";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+
+    /* ============ Music toggle ============ */
+    const musicBtn = document.getElementById('musicBtn');
+    const bgMusic = document.getElementById('bgMusic');
+    const toast = document.getElementById('toast');
+    function showToast(msg) {
+      if (!toast) {
+        console.log(msg);
+        return;
+      }
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3200);
+    }
+    if (musicBtn && bgMusic) {
+      musicBtn.addEventListener('click', () => {
+        if (bgMusic.paused) {
+          bgMusic.play().then(() => {
+            musicBtn.classList.add('playing');
+          }).catch((err) => {
+            console.error('Audio playback error:', err);
+            showToast('Could not play audio automatically. Please try again.');
+          });
+        } else {
+          bgMusic.pause();
+          musicBtn.classList.remove('playing');
+        }
+      });
+    }
+
+  </script>
+
+</body>
+
+
+</html>
