@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation - Prerna & Sumit</title>
+    <!-- Google Fonts for elegant typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Variables */
+        :root {
+            --bg-color: #fdf8f4;
+            --card-bg: rgba(253, 248, 244, 0.92);
+            --text-primary: #5a3c26;
+            --text-muted: #8c684d;
+            --gold-accent: #d4af37;
+            --gold-light: #f7e7ce;
+            --gold-border: rgba(212, 175, 55, 0.4);
+            --maroon-deep: #7a2021;
+            --pink-accent: #d18a8a;
+            --shadow: 0 10px 30px rgba(90, 60, 38, 0.12);
+        }
+
+        /* General Reset & Styles */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Lora', serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, p {
+            margin: 0;
+        }
+
+        /* Container helper */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Scroll Animation Classes */
+        .slide-up {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .slide-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 75px 20px;
+            text-align: center;
+        }
+
+        .section-header {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2.8rem, 6vw, 3.8rem);
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .section-subtitle {
+            font-size: 0.92rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* ================= HERO SECTION ================= */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            background-image: url('Beige and Pink Watercolor Wedding Invitation.png');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 16px;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(253, 248, 244, 0.35) 0%, rgba(253, 248, 244, 0.15) 100%);
+            pointer-events: none;
+        }
+
+        .hero-card {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 480px;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--gold-border);
+            border-radius: 120px 120px 28px 28px;
+            padding: 45px 28px 36px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            inset: 10px;
+            border: 1px solid rgba(184, 134, 11, 0.25);
+            border-radius: 112px 112px 20px 20px;
+            pointer-events: none;
+        }
+
+        .hero-emblem {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 1px solid var(--gold-accent);
+            background: rgba(255, 255, 255, 0.65);
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15);
+        }
+
+        .monogram {
+            font-family: 'Lora', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+        }
+
+        .intro-text {
+            font-size: 0.85rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        .names {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2.4rem, 8vw, 3.8rem);
+            line-height: 1.25;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+        }
+
+        .names .ampersand {
+            display: block;
+            font-size: 0.7em;
+            margin: -4px 0;
+            color: var(--gold-accent);
+        }
+
+        .cordially {
+            font-size: clamp(0.9rem, 2.8vw, 1.05rem);
+            font-style: italic;
+            color: var(--text-primary);
+            max-width: 360px;
+            margin: 0 auto 24px;
+            line-height: 1.5;
+        }
+
+        .date-card {
+            background: rgba(255, 255, 255, 0.65);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 14px;
+            padding: 16px 14px;
+            margin-bottom: 22px;
+        }
+
+        .date-header {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .date-main {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .date-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+        }
+
+        .date-label {
+            font-size: 0.65rem;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+            text-transform: uppercase;
+        }
+
+        .date-val {
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            color: var(--text-primary);
+        }
+
+        .date-divider {
+            width: 1px;
+            height: 36px;
+            background: var(--gold-border);
+        }
+
+        .date-num-col { flex: 1.2; }
+
+        .date-num {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+            color: var(--text-primary);
+        }
+
+        .venue-card {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(253, 248, 244, 0.9);
+            border: 1px dashed var(--gold-border);
+            border-radius: 20px;
+            padding: 10px 18px;
+            margin-bottom: 24px;
+            max-width: 100%;
+        }
+
+        .venue-icon {
+            width: 18px;
+            height: 18px;
+            fill: var(--text-muted);
+            flex-shrink: 0;
+        }
+
+        .venue-text {
+            font-size: 0.88rem;
+            letter-spacing: 1px;
+            line-height: 1.4;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--maroon-deep);
+            color: #fff;
+            padding: 11px 22px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(122, 32, 33, 0.25);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: #5d1718;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(122, 32, 33, 0.35);
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--text-primary);
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(90, 60, 38, 0.08);
+            transform: translateY(-2px);
+        }
+
+        /* ================= COUNTDOWN SECTION ================= */
+        .countdown-section {
+            background: linear-gradient(180deg, var(--bg-color) 0%, #f9f0e8 100%);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            max-width: 540px;
+            margin: 0 auto;
+        }
+
+        .timer-box {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--gold-border);
+            border-radius: 16px;
+            padding: 20px 10px;
+            box-shadow: 0 4px 15px rgba(90, 60, 38, 0.06);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .timer-box:hover {
+            transform: translateY(-4px);
+        }
+
+        .timer-num {
+            font-size: clamp(1.8rem, 5vw, 2.6rem);
+            font-weight: 700;
+            color: var(--maroon-deep);
+            line-height: 1;
+            margin-bottom: 6px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .timer-unit {
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* ================= PHOTO CAROUSEL GALLERY SECTION ================= */
+        .carousel-section {
+            background: var(--bg-color);
+        }
+
+        .carousel-container {
+            position: relative;
+            max-width: 680px;
+            margin: 0 auto;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gold-border);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            position: relative;
+            aspect-ratio: 16 / 10;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            bottom: 0;
+            inset-x: 0;
+            padding: 24px 20px 16px;
+            background: linear-gradient(to top, rgba(90, 60, 38, 0.85) 0%, transparent 100%);
+            color: #fff;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .carousel-caption-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 2px;
+        }
+
+        .carousel-caption-sub {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(253, 248, 244, 0.85);
+            border: 1px solid var(--gold-accent);
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .carousel-btn:hover {
+            background: var(--maroon-deep);
+            color: #fff;
+            border-color: var(--maroon-deep);
+        }
+
+        .carousel-prev { left: 16px; }
+        .carousel-next { right: 16px; }
+
+        .carousel-dots {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(140, 104, 77, 0.3);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: var(--maroon-deep);
+            transform: scale(1.3);
+        }
+
+        /* ================= STRUCTURED WEDDING SCHEDULE TIMELINE ================= */
+        .schedule-section {
+            background: linear-gradient(180deg, #f9f0e8 0%, var(--bg-color) 100%);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .timeline-wrapper {
+            position: relative;
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* Vertical Center Gold Line */
+        .timeline-line {
+            position: absolute;
+            top: 20px;
+            bottom: 20px;
+            left: 50%;
+            width: 2px;
+            background: linear-gradient(180deg, transparent 0%, var(--gold-accent) 15%, var(--gold-accent) 85%, transparent 100%);
+            transform: translateX(-50%);
+        }
+
+        .timeline-card-item {
+            position: relative;
+            margin-bottom: 45px;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .timeline-card-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Node Circle Icon */
+        .timeline-node {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #fff;
+            border: 2px solid var(--gold-accent);
+            box-shadow: 0 4px 14px rgba(212, 175, 55, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            z-index: 5;
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-card-item:hover .timeline-node {
+            transform: translateX(-50%) scale(1.15);
+            background: var(--gold-light);
+        }
+
+        /* Timeline Event Card Box */
+        .timeline-content-box {
+            width: calc(50% - 40px);
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid var(--gold-border);
+            border-radius: 20px;
+            padding: 22px 20px;
+            box-shadow: var(--shadow);
+            text-align: left;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-card-item:nth-child(odd) .timeline-content-box {
+            margin-right: auto;
+            text-align: right;
+        }
+
+        .timeline-card-item:nth-child(even) .timeline-content-box {
+            margin-left: auto;
+            text-align: left;
+        }
+
+        .timeline-card-item:hover .timeline-content-box {
+            transform: translateY(-4px);
+            border-color: var(--gold-accent);
+            box-shadow: 0 12px 30px rgba(122, 32, 33, 0.12);
+        }
+
+        .timeline-time-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--gold-light);
+            color: var(--maroon-deep);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 0.78rem;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .timeline-event-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            line-height: 1.1;
+        }
+
+        .timeline-event-desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .timeline-location-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--pink-accent);
+            font-weight: 600;
+        }
+
+        /* ================= SAVE TO CALENDAR SECTION ================= */
+        .calendar-section {
+            background: var(--bg-color);
+        }
+
+        .calendar-card {
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid var(--gold-border);
+            border-radius: 20px;
+            padding: 35px 24px;
+            max-width: 540px;
+            margin: 0 auto;
+            box-shadow: var(--shadow);
+        }
+
+        .calendar-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .btn-cal {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--maroon-deep);
+            color: #fff;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(122, 32, 33, 0.2);
+            text-decoration: none;
+        }
+
+        .btn-cal:hover {
+            background: #5d1718;
+            transform: translateY(-2px);
+        }
+
+        .btn-cal-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--gold-accent);
+            box-shadow: none;
+        }
+
+        .btn-cal-outline:hover {
+            background: rgba(212, 175, 55, 0.12);
+        }
+
+        /* ================= GOOGLE MAPS NAVIGATION SECTION ================= */
+        .map-section {
+            background: linear-gradient(180deg, #f9f0e8 0%, var(--bg-color) 100%);
+        }
+
+        .map-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--gold-border);
+            border-radius: 24px;
+            padding: 24px;
+            max-width: 640px;
+            margin: 0 auto;
+            box-shadow: var(--shadow);
+        }
+
+        .map-container {
+            width: 100%;
+            height: 280px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .venue-info {
+            font-size: 1rem;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        /* ================= LIVE RSVP TRACKING SECTION ================= */
+        .rsvp-section {
+            background: var(--bg-color);
+        }
+
+        .rsvp-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--gold-border);
+            border-radius: 24px;
+            padding: 40px 28px;
+            max-width: 540px;
+            margin: 0 auto;
+            box-shadow: var(--shadow);
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid rgba(140, 104, 77, 0.3);
+            border-radius: 12px;
+            background: #fff;
+            font-family: 'Lora', serif;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--gold-accent);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.18);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 16px;
+            margin-top: 6px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .radio-option input {
+            accent-color: var(--maroon-deep);
+            width: 18px;
+            height: 18px;
+        }
+
+        .rsvp-btn-wrapper {
+            text-align: center;
+            margin-top: 28px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 20px;
+            text-align: center;
+            background: #f4eadf;
+            border-top: 1px solid var(--gold-border);
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        /* ================= MUSIC PLAYER TOGGLE ================= */
+        .music-btn {
+            position: fixed;
+            bottom: 26px;
+            right: 22px;
+            z-index: 600;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            background: var(--maroon-deep);
+            box-shadow: 0 4px 18px rgba(122, 32, 33, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f7e7ce;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.08);
+            background: #5d1718;
+        }
+
+        .music-btn svg { width: 26px; height: 26px; }
+        .music-btn .icon-speaker { display: none; }
+        .music-btn .icon-mute { display: block; }
+        .music-btn.playing .icon-speaker { display: block; }
+        .music-btn.playing .icon-mute { display: none; }
+
+        .music-note {
+            position: absolute;
+            top: -6px;
+            right: -2px;
+            font-size: 0.7rem;
+            color: #f7e7ce;
+            opacity: 0;
+        }
+
+        .music-btn.playing .music-note {
+            animation: noteFloat 2.2s ease-in infinite;
+        }
+
+        @keyframes noteFloat {
+            0% { opacity: 0; transform: translateY(0) translateX(0); }
+            15% { opacity: 1; }
+            100% { opacity: 0; transform: translateY(-26px) translateX(8px); }
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 90px;
+            right: 22px;
+            background: rgba(90, 60, 38, 0.95);
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            z-index: 600;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Responsive Breakpoints for Schedule Timeline */
+        @media (max-width: 650px) {
+            .timeline-line {
+                left: 24px;
+                transform: none;
+            }
+
+            .timeline-node {
+                left: 24px;
+                transform: translateX(-50%);
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .timeline-card-item:hover .timeline-node {
+                transform: translateX(-50%) scale(1.1);
+            }
+
+            .timeline-content-box {
+                width: calc(100% - 60px);
+                margin-left: auto !important;
+                margin-right: 0 !important;
+                text-align: left !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .timer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            .hero-card {
+                padding: 36px 18px 28px;
+                border-radius: 80px 80px 24px 24px;
+            }
+            .radio-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .carousel-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+            .carousel-prev { left: 8px; }
+            .carousel-next { right: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="hero">
+        <div class="hero-card slide-up">
+            <!-- Monogram Emblem -->
+            <div class="hero-emblem">
+                <span class="monogram">P & S</span>
+            </div>
+
+            <!-- Intro Header -->
+            <p class="intro-text">Together with their families</p>
+            
+            <!-- Couple Names -->
+            <h1 class="names">Prerna Singh <span class="ampersand">&amp;</span> Sumit Gupta</h1>
+            
+            <!-- Invitation Phrase -->
+            <p class="cordially">
+                cordially invite you to join the occasion of their joyous commitment
+            </p>
+            
+            <!-- Structured Date & Time Card -->
+            <div class="date-card">
+                <div class="date-header">JULY 2027</div>
+                <div class="date-main">
+                    <div class="date-col">
+                        <span class="date-label">DAY</span>
+                        <span class="date-val">SUNDAY</span>
+                    </div>
+                    <div class="date-divider"></div>
+                    <div class="date-col date-num-col">
+                        <span class="date-num">25</span>
+                    </div>
+                    <div class="date-divider"></div>
+                    <div class="date-col">
+                        <span class="date-label">TIME</span>
+                        <span class="date-val">8:00 AM</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Structured Venue Badge -->
+            <div class="venue-card">
+                <svg class="venue-icon" viewBox="0 0 24 24">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+                <div class="venue-text">123 Anywhere St, Any City, ST 12345</div>
+            </div>
+            
+
+        </div>
+    </section>
+
+
+
+    <!-- STRUCTURED WEDDING SCHEDULE SECTION -->
+    <section class="schedule-section" id="schedule">
+        <div class="container slide-up">
+            <div class="section-header">
+                <h2 class="section-title">Wedding Schedule</h2>
+                <p class="section-subtitle">July 25, 2027 Timeline</p>
+            </div>
+
+            <div class="timeline-wrapper">
+                <div class="timeline-line"></div>
+
+                <!-- Event 1: Baraat Arrival -->
+                <div class="timeline-card-item slide-up">
+                    <div class="timeline-node">🎺</div>
+                    <div class="timeline-content-box">
+                        <div class="timeline-time-badge">
+                            <span>⏰ 8:00 AM</span>
+                        </div>
+                        <h3 class="timeline-event-title">Baraat Arrival</h3>
+                        <p class="timeline-event-desc">
+                            Welcoming the groom's energetic procession with festive dhol beats, music, and royal garland welcome.
+                        </p>
+                        <span class="timeline-location-tag">📍 Main Entrance Courtyard</span>
+                    </div>
+                </div>
+
+                <!-- Event 2: Wedding Ceremony -->
+                <div class="timeline-card-item slide-up">
+                    <div class="timeline-node">💍</div>
+                    <div class="timeline-content-box">
+                        <div class="timeline-time-badge">
+                            <span>⏰ 10:00 AM</span>
+                        </div>
+                        <h3 class="timeline-event-title">Wedding Ceremony</h3>
+                        <p class="timeline-event-desc">
+                            The auspicious Anand Karaj & Pheras ceremony uniting Prerna and Sumit in eternal love and blessings.
+                        </p>
+                        <span class="timeline-location-tag">📍 Royal Mandap Hall</span>
+                    </div>
+                </div>
+
+                <!-- Event 3: Reception & Lunch -->
+                <div class="timeline-card-item slide-up">
+                    <div class="timeline-node">🥂</div>
+                    <div class="timeline-content-box">
+                        <div class="timeline-time-badge">
+                            <span>⏰ 1:00 PM</span>
+                        </div>
+                        <h3 class="timeline-event-title">Reception & Lunch</h3>
+                        <p class="timeline-event-desc">
+                            A grand celebratory banquet feast with family, delicious delicacies, music, and photo memories.
+                        </p>
+                        <span class="timeline-location-tag">📍 Grand Ballroom</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- FOOTER -->
+    <footer>
+        <p style="font-family: 'Great Vibes', cursive; font-size: 2.2rem; margin-bottom: 8px; color: var(--text-primary);">
+            Prerna & Sumit
+        </p>
+        <p>With Love & Joy • July 25, 2027</p>
+    </footer>
+
+    <!-- FLOATING MUSIC TOGGLE BUTTON -->
+    <button class="music-btn" id="musicBtn" aria-label="Toggle background music">
+        <span class="music-note">♪</span>
+        <svg class="icon-mute" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22 9L16 15M16 9L22 15M3 10.5V13.5C3 14.6046 3.5 15.5 5.5 16C7.5 16.5 9 21 12 21C14 21 14 3 12 3C9 3 7.5 7.5 5.5 8C3.5 8.5 3 9.39543 3 10.5Z"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        <svg class="icon-speaker" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 6C20.5 7.5 21 10 21 12C21 14 20.5 16.5 19 18M16 8.99998C16.5 9.49998 17 10.5 17 12C17 13.5 16.5 14.5 16 15M3 10.5V13.5C3 14.6046 3.5 15.5 5.5 16C7.5 16.5 9 21 12 21C14 21 14 3 12 3C9 3 7.5 7.5 5.5 8C3.5 8.5 3 9.39543 3 10.5Z"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+    </button>
+    <div class="toast" id="toast"></div>
+
+    <!-- AUDIO ELEMENT -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="music/leberch-invitation-wedding-375839.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- SCRIPTS -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // 1. Intersection Observer for Scroll Animation
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.slide-up').forEach(el => {
+                observer.observe(el);
+            });
+
+            // 2. Interactive Countdown Timer Logic
+            const targetDate = new Date("July 25, 2027 08:00:00").getTime();
+
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const diff = targetDate - now;
+
+                if (diff <= 0) {
+                    document.getElementById("timer-days").textContent = "00";
+                    document.getElementById("timer-hours").textContent = "00";
+                    document.getElementById("timer-mins").textContent = "00";
+                    document.getElementById("timer-secs").textContent = "00";
+                    return;
+                }
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById("timer-days").textContent = String(days).padStart(2, '0');
+                document.getElementById("timer-hours").textContent = String(hours).padStart(2, '0');
+                document.getElementById("timer-mins").textContent = String(minutes).padStart(2, '0');
+                document.getElementById("timer-secs").textContent = String(seconds).padStart(2, '0');
+            }
+
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+
+            // 3. Photo Carousel Logic
+            const track = document.querySelector('.carousel-track');
+            const slides = document.querySelectorAll('.carousel-slide');
+            const prevBtn = document.getElementById('prevSlide');
+            const nextBtn = document.getElementById('nextSlide');
+            const dotsContainer = document.getElementById('carouselDots');
+            let currentIndex = 0;
+            let autoSlideInterval;
+
+            if (slides.length > 0) {
+                slides.forEach((_, idx) => {
+                    const dot = document.createElement('button');
+                    dot.classList.add('carousel-dot');
+                    if (idx === 0) dot.classList.add('active');
+                    dot.setAttribute('aria-label', `Go to slide ${idx + 1}`);
+                    dot.addEventListener('click', () => goToSlide(idx));
+                    dotsContainer.appendChild(dot);
+                });
+
+                const dots = document.querySelectorAll('.carousel-dot');
+
+                function updateCarousel() {
+                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                    dots.forEach((dot, idx) => {
+                        dot.classList.toggle('active', idx === currentIndex);
+                    });
+                }
+
+                function goToSlide(index) {
+                    currentIndex = (index + slides.length) % slides.length;
+                    updateCarousel();
+                    resetTimer();
+                }
+
+                prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+                nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+
+                function startTimer() {
+                    autoSlideInterval = setInterval(() => {
+                        goToSlide(currentIndex + 1);
+                    }, 4500);
+                }
+
+                function resetTimer() {
+                    clearInterval(autoSlideInterval);
+                    startTimer();
+                }
+
+                const containerEl = document.getElementById('weddingCarousel');
+                if (containerEl) {
+                    containerEl.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+                    containerEl.addEventListener('mouseleave', startTimer);
+
+                    let startX = 0;
+                    containerEl.addEventListener('touchstart', e => {
+                        startX = e.touches[0].clientX;
+                    }, { passive: true });
+
+                    containerEl.addEventListener('touchend', e => {
+                        const endX = e.changedTouches[0].clientX;
+                        if (startX - endX > 40) goToSlide(currentIndex + 1);
+                        else if (endX - startX > 40) goToSlide(currentIndex - 1);
+                    }, { passive: true });
+                }
+
+                startTimer();
+            }
+
+            // 4. Live RSVP Form Handler (WhatsApp Integration)
+            const rsvpForm = document.getElementById('rsvpForm');
+            if (rsvpForm) {
+                rsvpForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const name = document.getElementById('guestName').value.trim();
+                    const attendance = document.querySelector('input[name="attendance"]:checked').value;
+                    const guestCount = document.getElementById('guestCount').value;
+                    const message = document.getElementById('guestMessage').value.trim();
+
+                    let text = `*RSVP Confirmation - Prerna & Sumit's Wedding*%0A%0A`;
+                    text += `*Guest Name:* ${encodeURIComponent(name)}%0A`;
+                    text += `*Status:* ${encodeURIComponent(attendance)}%0A`;
+                    text += `*Party Size:* ${encodeURIComponent(guestCount)}%0A`;
+                    if (message) {
+                        text += `*Message/Wishes:* ${encodeURIComponent(message)}%0A`;
+                    }
+
+                    const whatsappNumber = "1234567890";
+                    const waUrl = `https://wa.me/${whatsappNumber}?text=${text}`;
+                    window.open(waUrl, '_blank');
+                });
+            }
+
+            // 5. Music Toggle Logic
+            const musicBtn = document.getElementById('musicBtn');
+            const bgMusic = document.getElementById('bgMusic');
+            const toast = document.getElementById('toast');
+
+            function showToast(msg) {
+                if (!toast) return;
+                toast.textContent = msg;
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 3200);
+            }
+
+            if (musicBtn && bgMusic) {
+                musicBtn.addEventListener('click', () => {
+                    if (bgMusic.paused) {
+                        bgMusic.play().then(() => {
+                            musicBtn.classList.add('playing');
+                        }).catch((err) => {
+                            console.error('Audio playback error:', err);
+                            showToast('Could not play audio automatically. Please try clicking again.');
+                        });
+                    } else {
+                        bgMusic.pause();
+                        musicBtn.classList.remove('playing');
+                    }
+                });
+            }
+        });
+
+        // 6. Downloadable Apple / Outlook .ics Calendar Generator
+        function downloadICS() {
+            const icsData = 
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Prerna and Sumit Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+SUMMARY:Prerna & Sumit's Wedding
+DESCRIPTION:Join us for the joyous wedding celebration of Prerna Singh and Sumit Gupta!
+LOCATION:123 Anywhere St, Any City, ST 12345
+DTSTART:20270725T080000
+DTEND:20270725T140000
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR`;
+
+            const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.setAttribute('download', 'Prerna_Sumit_Wedding.ics');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
