@@ -16,72 +16,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <style>
-    /* music toggle */
-    .music-btn {
-      position: fixed;
-      bottom: 26px;
-      right: 22px;
-      z-index: 600;
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: var(--bg-silk);
-      box-shadow: var(--shadow);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--gold-light);
-    }
-
-    .music-btn svg {
-      width: 26px;
-      height: 26px;
-    }
-
-    .music-btn .icon-speaker {
-      display: none;
-    }
-
-    .music-btn .icon-mute {
-      display: block;
-    }
-
-    .music-btn.playing .icon-speaker {
-      display: block;
-    }
-
-    .music-btn.playing .icon-mute {
-      display: none;
-    }
-
-    @keyframes flicker {
-
-      0%,
-      100% {
-        transform: scaleY(1) rotate(0deg);
-      }
-
-      30% {
-        transform: scaleY(1.12) rotate(-2deg);
-      }
-
-      60% {
-        transform: scaleY(0.92) rotate(2deg);
-      }
-    }
-
-    .music-note {
-      position: absolute;
-      top: -6px;
-      right: -2px;
-      font-size: 0.6rem;
-      color: var(--gold-light);
-      opacity: 0;
-    }
-
-    .music-btn.playing .music-note {
-      animation: noteFloat 2.2s ease-in infinite;
-    }
+    
 
     @keyframes noteFloat {
       0% {
@@ -978,34 +913,7 @@
 <body>
 
   <!-- ============ SECTION 1 : HERO ============ -->
-  <button class="music-btn" id="musicBtn" aria-label="Toggle background music">
-    <span class="music-note">♪</span>
-    <!-- Mute icon (shown when music is paused / initial state) -->
-
-    <svg class="icon-mute" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-      <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-      <g id="SVGRepo_iconCarrier">
-        <path
-          d="M22 9L16 15M16 9L22 15M3 10.5V13.5C3 14.6046 3.5 15.5 5.5 16C7.5 16.5 9 21 12 21C14 21 14 3 12 3C9 3 7.5 7.5 5.5 8C3.5 8.5 3 9.39543 3 10.5Z"
-          stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-      </g>
-    </svg>
-    <!-- Speaker icon (shown when music is playing) -->
-
-    <svg class="icon-speaker" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-      <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-      <g id="SVGRepo_iconCarrier">
-        <path
-          d="M19 6C20.5 7.5 21 10 21 12C21 14 20.5 16.5 19 18M16 8.99998C16.5 9.49998 17 10.5 17 12C17 13.5 16.5 14.5 16 15M3 10.5V13.5C3 14.6046 3.5 15.5 5.5 16C7.5 16.5 9 21 12 21C14 21 14 3 12 3C9 3 7.5 7.5 5.5 8C3.5 8.5 3 9.39543 3 10.5Z"
-          stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-      </g>
-    </svg>
-  </button>
-  <audio id="bgMusic" loop preload="auto">
-    <source src="music/leberch-invitation-wedding-375839.mp3" type="audio/mpeg">
-  </audio>
+  
 
   <section class="hero">
     <div class="hero-frame" aria-hidden="true"></div>
@@ -1344,38 +1252,156 @@
       document.body.removeChild(link);
     });
 
-    /* ============ Music toggle ============ */
-    const musicBtn = document.getElementById('musicBtn');
-    const bgMusic = document.getElementById('bgMusic');
-    const toast = document.getElementById('toast');
-    function showToast(msg) {
-      if (!toast) {
-        console.log(msg);
-        return;
-      }
-      toast.textContent = msg;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 3200);
-    }
-    if (musicBtn && bgMusic) {
-      musicBtn.addEventListener('click', () => {
-        if (bgMusic.paused) {
-          bgMusic.play().then(() => {
-            musicBtn.classList.add('playing');
-          }).catch((err) => {
-            console.error('Audio playback error:', err);
-            showToast('Could not play audio automatically. Please try again.');
-          });
-        } else {
-          bgMusic.pause();
-          musicBtn.classList.remove('playing');
-        }
-      });
-    }
+    
 
   </script>
 
 </body>
 
+
+</html>
+
+<html>
+
+<head>
+    <style>
+        /* music toggle */
+        .music-btn {
+            position: fixed;
+            bottom: 26px;
+            right: 22px;
+            z-index: 600;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--maroon-deep);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-light);
+        }
+
+        .music-btn svg {
+            width: 26px;
+            height: 26px;
+        }
+
+        .music-btn .icon-speaker {
+            display: none;
+        }
+
+        .music-btn .icon-mute {
+            display: block;
+        }
+
+        .music-btn.playing .icon-speaker {
+            display: block;
+        }
+
+        .music-btn.playing .icon-mute {
+            display: none;
+        }
+
+        @keyframes flicker {
+
+            0%,
+            100% {
+                transform: scaleY(1) rotate(0deg);
+            }
+
+            30% {
+                transform: scaleY(1.12) rotate(-2deg);
+            }
+
+            60% {
+                transform: scaleY(0.92) rotate(2deg);
+            }
+        }
+
+        .music-note {
+            position: absolute;
+            top: -6px;
+            right: -2px;
+            font-size: 0.6rem;
+            color: var(--gold-light);
+            opacity: 0;
+        }
+
+        .music-btn.playing .music-note {
+            animation: noteFloat 2.2s ease-in infinite;
+        }
+
+        @keyframes noteFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(0) translateX(0);
+            }
+
+            15% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-26px) translateX(8px);
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <button class="music-btn" id="musicBtn" aria-label="Toggle background music">
+        <span class="music-note">♪</span>
+        <!-- Mute icon (shown when music is paused / initial state) -->
+        <svg class="icon-mute" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <path
+                    d="M22 9L16 15M16 9L22 15M3 10.5V13.5C3 14.6046 3.5 15.5 5.5 16C7.5 16.5 9 21 12 21C14 21 14 3 12 3C9 3 7.5 7.5 5.5 8C3.5 8.5 3 9.39543 3 10.5Z"
+                    stroke="#0D0D0D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+        </svg>
+        <!-- Speaker icon (shown when music is playing) -->
+        <svg class="icon-speaker" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <path
+                    d="M19 6C20.5 7.5 21 10 21 12C21 14 20.5 16.5 19 18M16 8.99998C16.5 9.49998 17 10.5 17 12C17 13.5 16.5 14.5 16 15M3 10.5V13.5C3 14.6046 3.5 15.5 5.5 16C7.5 16.5 9 21 12 21C14 21 14 3 12 3C9 3 7.5 7.5 5.5 8C3.5 8.5 3 9.39543 3 10.5Z"
+                    stroke="#0D0D0D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+        </svg>
+    </button>
+    <audio id="bgMusic" loop preload="none">
+        <source src="music/leberch-invitation-wedding-375839.mp3" type="audio/mpeg">
+    </audio>
+</body>
+
+<script>
+    /* ============ Music toggle ============ */
+    const musicBtn = document.getElementById('musicBtn');
+    const bgMusic = document.getElementById('bgMusic');
+    const toast = document.getElementById('toast');
+    function showToast(msg) {
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3200);
+    }
+    musicBtn.addEventListener('click', () => {
+        if (bgMusic.paused) {
+            bgMusic.play().then(() => {
+                musicBtn.classList.add('playing');
+            }).catch(() => {
+                showToast('Add your song as music/leberch-invitation-wedding-375839.mp3 to enable background music.');
+            });
+        } else {
+            bgMusic.pause();
+            musicBtn.classList.remove('playing');
+        }
+    });
+</script>
 
 </html>
